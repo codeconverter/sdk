@@ -40,6 +40,7 @@ namespace CSharpToPowerShell.Test
                 new ConversionTestCase("MethodDeclarationWithArguments", "Declare a method with arguments"),
                 new ConversionTestCase("ObjectCreation", "Create an object"),
                 new ConversionTestCase("ObjectCreationWithArguments", "Create an object with arugments"),
+                new ConversionTestCase("Operators", "Common operators"),
                 new ConversionTestCase("PropertyAccess", "Access the property of a variable"),
                 new ConversionTestCase("Snippet", "Declare a method outside of a class or namespace")
             };
