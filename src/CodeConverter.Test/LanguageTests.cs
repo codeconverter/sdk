@@ -82,7 +82,7 @@ namespace CSharpToPowerShell.Test
                 } 
             }
 
-            var languageTestsMarkdownPath = Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\language-tests.md");
+            var languageTestsMarkdownPath = Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\..\..\language-tests.md");
             File.WriteAllText(languageTestsMarkdownPath, mdBuilder.ToString());
         }
 
