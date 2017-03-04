@@ -126,16 +126,25 @@ namespace CodeConverter.PowerShell
 
         public override void VisitElseClause(ElseClause node)
         {
+            NewLine();
             Append("else");
 
             var isIf = node.Body is IfStatement;
             if (!isIf)
+            {
+                NewLine();
                 Append("{");
+                Indent();
+                NewLine();
+            }
 
             node.Body.Accept(this);
 
             if (!isIf)
+            {
+                Outdent();
                 Append("}");
+            }
         }
 
         public override void VisitForStatement(ForStatement node)
@@ -191,11 +200,19 @@ namespace CodeConverter.PowerShell
 
         public override void VisitIfStatement(IfStatement node)
         {
-            Append("if(");
+            Append("if (");
             node.Condition.Accept(this);
-            Append("){");
+            Append(")");
+            NewLine();
+            Append("{");
+            Indent();
+            NewLine();
+
             node.Body.Accept(this);
+
+            Outdent();
             Append("}");
+
             node.ElseClause?.Accept(this);
         }
 
