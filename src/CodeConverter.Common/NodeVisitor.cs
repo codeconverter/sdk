@@ -103,6 +103,11 @@
             node.Statement.Accept(this);
         }
 
+        public virtual void VisitFinally(Finally node)
+        {
+            node.Body.Accept(this);
+        }
+
         public virtual void VisitForEachStatement(ForEachStatement node)
         {
             node.Statement.Accept(this);

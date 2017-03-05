@@ -247,7 +247,9 @@ namespace CodeConverter.PowerShell
                 catches.Add(catchNode);
             }
 
-            _currentNode = new Try(tryBody, catches);
+            var fin = VisitSyntaxNode(tryStatementAst.Finally) as Finally;
+
+            _currentNode = new Try(tryBody, catches, fin);
 
             return AstVisitAction.SkipChildren;
         }

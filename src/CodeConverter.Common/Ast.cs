@@ -290,6 +290,21 @@ namespace CodeConverter.Common
             visitor.VisitForStatement(this);
         }
     }
+
+    public class Finally : Node
+    {
+        public Finally(Node body)
+        {
+            Body = body;
+        }
+
+        public Node Body { get; }
+
+        public override void Accept(NodeVisitor visitor)
+        {
+            visitor.VisitFinally(this);
+        }
+    }
     
     public class ForEachStatement : Node
     {
@@ -550,13 +565,15 @@ namespace CodeConverter.Common
     
     public class Try : Node
     {
-        public Try(Block block, IEnumerable<Catch> catches)
+        public Try(Block block, IEnumerable<Catch> catches, Finally @finally)
         {
             Block = block;
             Catches = catches;
+            Finally = @finally;
         }
         public Block Block { get; }
         public IEnumerable<Catch> Catches { get; }
+        public Finally Finally { get; }
 
         public override void Accept(NodeVisitor visitor)
         {

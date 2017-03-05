@@ -14,6 +14,10 @@ namespace CSharpToPowerShell.Test.Languages.CSharp
             var notEq = 1 != 2;
             var or = 1 == 2 || 2 == 1;
             var and = 1 == 2 && 2 == 1;
+            var gt = 1 > 2;
+            var lt = 1 < 2;
+            var ge = 1 >= 2;
+            var le = 1 <= 2;
         }
     }
 }

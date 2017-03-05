@@ -110,10 +110,17 @@ namespace CodeConverter.PowerShell
             Append("catch");
             if (node.Declaration != null)
             {
+                Append(" ");
                 node.Declaration.Accept(this);
             }
+            NewLine();
             Append("{");
+            Indent();
+            NewLine();
+
             node.Block.Accept(this);
+
+            Outdent();
             Append("}");
         }
 
@@ -145,6 +152,20 @@ namespace CodeConverter.PowerShell
                 Outdent();
                 Append("}");
             }
+        }
+
+        public override void VisitFinally(Finally node)
+        {
+            Append("finally");
+            NewLine();
+            Append("{");
+            Indent();
+            NewLine();
+
+            node.Body.Accept(this);
+
+            Outdent();
+            Append("}");
         }
 
         public override void VisitForStatement(ForStatement node)
@@ -338,13 +359,28 @@ namespace CodeConverter.PowerShell
 
         public override void VisitTry(Try node)
         {
-            Append("try{");
+            Append("try");
+            NewLine();
+            Append("{");
+            Indent();
+            NewLine();
+
             node.Block.Accept(this);
+
+            Outdent();
             Append("}");
             foreach(var @catch in node.Catches)
             {
+                NewLine();
                 @catch.Accept(this);
             }
+
+            if (node.Finally != null)
+            {
+                NewLine();
+                node.Finally.Accept(this);
+            }
+            
         }
 
         public override void VisitReturnStatement(ReturnStatement node)

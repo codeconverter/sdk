@@ -213,6 +213,13 @@ namespace CodeConverter.CSharp
             _currentNode = VisitSyntaxNode(node.Expression);
         }
 
+        public override void VisitFinallyClause(FinallyClauseSyntax node)
+        {
+            var body = VisitSyntaxNode(node.Block);
+
+            _currentNode = new Finally(body);
+        }
+
         public override void VisitForStatement(ForStatementSyntax node)
         {
             Node declaration = null;
@@ -362,7 +369,9 @@ namespace CodeConverter.CSharp
                 catches.Add(VisitSyntaxNode(@catch) as Catch);
             }
 
-            _currentNode = new Try(block, catches);
+            var fin = VisitSyntaxNode(node.Finally) as Finally;
+
+            _currentNode = new Try(block, catches, fin);
         }
 
         public override void VisitReturnStatement(ReturnStatementSyntax node)
