@@ -45,7 +45,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CodeConverterFactory.cs" />
-    <Compile Include="CSharpConverterTest.cs" />
     <Content Include="Languages\CSharp\MethodDeclaration.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
