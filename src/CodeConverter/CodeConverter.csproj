@@ -15,6 +15,7 @@
     <PackageReleaseNotes>Initial release</PackageReleaseNotes>
     <PackageTags>code conversion</PackageTags>
     <PackageId>codeconverter</PackageId>
+    <Version>1.0.0-alpha</Version>
   </PropertyGroup>
 
   <ItemGroup>

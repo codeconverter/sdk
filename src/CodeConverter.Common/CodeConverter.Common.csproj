@@ -2,6 +2,20 @@
 
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>
+    <PackageId>codeconverter.common</PackageId>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Authors>Adam Driscoll</Authors>
+    <Company />
+    <Product>CodeConverter.NET SDK</Product>
+    <Description>Convert code from one programming language to another using the CodeConverter.NET SDK.</Description>
+    <Copyright>Copyright Adam Driscoll 2017</Copyright>
+    <PackageLicenseUrl>https://github.com/codeconverter/sdk/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/codeconverter/sdk</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/codeconverter/sdk</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <PackageTags>code conversion</PackageTags>
+    <PackageReleaseNotes>Initial release</PackageReleaseNotes>
+    <Version>1.0.0-alpha</Version>
   </PropertyGroup>
 
   <ItemGroup>
