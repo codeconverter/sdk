@@ -325,14 +325,14 @@ namespace CodeConverter.Common
     
     public class ForEachStatement : Node
     {
-        public ForEachStatement(string identifier, Node expression, Node statement)
+        public ForEachStatement(IdentifierName identifier, Node expression, Node statement)
         {
             Identifier = identifier;
             Expression = expression;
             Statement = statement;
         }
 
-        public string Identifier { get; }
+        public IdentifierName Identifier { get; }
         public Node Expression { get; }
         public Node Statement { get; }
 

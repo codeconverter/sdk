@@ -269,7 +269,7 @@ namespace CodeConverter.CSharp
         {
             var expression = VisitSyntaxNode(node.Expression);
             var statement = VisitSyntaxNode(node.Statement);
-            var identifier = node.Identifier.Text;
+            var identifier = new IdentifierName(node.Identifier.Text);
 
             _currentNode = new ForEachStatement(identifier, expression, statement);
         }
