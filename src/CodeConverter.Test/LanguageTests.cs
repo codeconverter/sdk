@@ -1,7 +1,7 @@
 ﻿using CodeConverter.Common;
 using CodeConverter.CSharp;
 using CodeConverter.PowerShell;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,14 +9,16 @@ using System.Text;
 
 namespace CSharpToPowerShell.Test
 {
-    [TestFixture]
+    [TestClass]
+    [DeploymentItem(@"Languages\", "Languages")]
     public class LanguageTests
     {
         public IEnumerable<ISyntaxTreeVisitor> SyntaxTreeVisitors { get; private set; }
         public IEnumerable<CodeWriter> CodeWriters { get; private set; }
         public IEnumerable<ConversionTestCase> TestCases { get; private set; }
+        public TestContext TestContext { get; set; }
 
-        [SetUp]
+        [TestInitialize]
         public void TestInit()
         {
             SyntaxTreeVisitors = new ISyntaxTreeVisitor[]
@@ -32,6 +34,7 @@ namespace CSharpToPowerShell.Test
 
             TestCases = new ConversionTestCase[]
             {
+                new ConversionTestCase("ArrayCreation", "Array creation initializers"),
                 new ConversionTestCase("AssignString", "Assign a string to a variable"),
                 new ConversionTestCase("AssignVariable", "Assign a constant to a variable"),
                 new ConversionTestCase("Cast", "Cast operator"),
@@ -52,7 +55,7 @@ namespace CSharpToPowerShell.Test
             };
         }
 
-        [Test]
+        [TestMethod]
         public void TestLanguages()
         {
             var mdBuilder = new StringBuilder();
@@ -81,7 +84,7 @@ namespace CSharpToPowerShell.Test
                         var ast = syntaxTreeVisitor.Visit(source);
                         var actual = codeWriter.Write(ast).Trim();
 
-                        Assert.That(actual, Is.EqualTo(target));
+                        Assert.AreEqual(actual, target);
                         mdBuilder.AppendLine($"## {testCase.Description}");
                         mdBuilder.AppendLine($"### Source: {sourceLanguage}");
                         mdBuilder.AppendLine($"```{sourceLanguage.ToLower()}");
@@ -96,7 +99,7 @@ namespace CSharpToPowerShell.Test
                 } 
             }
 
-            var languageTestsMarkdownPath = Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\..\..\language-tests.md");
+            var languageTestsMarkdownPath = Path.Combine(TestContext.TestDir, @"..\..\language-tests.md");
             File.WriteAllText(languageTestsMarkdownPath, mdBuilder.ToString());
         }
 
@@ -120,7 +123,7 @@ namespace CSharpToPowerShell.Test
 
             var testPath = $"Languages\\{languageName}\\{testName}{extension}";
 
-            var testData = Path.Combine(TestContext.CurrentContext.WorkDirectory, testPath);
+            var testData = Path.Combine(TestContext.TestDeploymentDir, testPath);
 
             if (!File.Exists(testData))
             {

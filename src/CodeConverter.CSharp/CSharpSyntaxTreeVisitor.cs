@@ -54,6 +54,19 @@ namespace CodeConverter.CSharp
             return _currentNode;
         }
 
+        public override void VisitArrayCreationExpression(ArrayCreationExpressionSyntax node)
+        {
+            var elements = new List<Node>();
+            if (node.Initializer != null)
+            {
+                foreach(var expression in node.Initializer.Expressions)
+                    elements.Add(VisitSyntaxNode(expression));
+            }
+
+            var type = node.Type.GetText().ToString().Trim();
+            _currentNode = new ArrayCreation(elements, type);
+        }
+
         public override void VisitAssignmentExpression(AssignmentExpressionSyntax node)
         {
             var left = VisitSyntaxNode(node.Left);

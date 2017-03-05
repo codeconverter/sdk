@@ -2,6 +2,10 @@
 {
     public class NodeVisitor
     {
+        public virtual void VisitArrayCreation(ArrayCreation node)
+        {
+        }
+
         public virtual void VisitAssignment(Assignment node)
         {
             node.Left.Accept(this);

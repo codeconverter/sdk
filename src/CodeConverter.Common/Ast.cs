@@ -41,6 +41,23 @@ namespace CodeConverter.Common
         Plus
     }
 
+    public class ArrayCreation : Node
+    {
+        public ArrayCreation(IEnumerable<Node> initializer, string type)
+        {
+            Initializer = initializer;
+            Type = type;
+        }
+
+        public IEnumerable<Node> Initializer { get; }
+        public string Type { get; }
+
+        public override void Accept(NodeVisitor visitor)
+        {
+            visitor.VisitArrayCreation(this);
+        }
+    }
+
     /// <summary>
     /// Binary expression. 
     /// </summary>

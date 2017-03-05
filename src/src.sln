@@ -17,6 +17,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeConverter.Test", "CodeC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeConverter", "CodeConverter\CodeConverter.csproj", "{8D4ED4CF-CB62-4522-8285-D3B020431A26}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{77A99A38-03AB-4682-85EA-07C8941DC2BD}"
+	ProjectSection(SolutionItems) = preProject
+		publish-packages.ps1 = publish-packages.ps1
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

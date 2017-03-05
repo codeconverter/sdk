@@ -29,6 +29,19 @@ namespace CodeConverter.PowerShell
 
         public override Language Language => Language.PowerShell;
 
+        public override void VisitArrayCreation(ArrayCreation node)
+        {
+            Append("@(");
+            foreach(var item in node.Initializer)
+            {
+                item.Accept(this);
+                Append(",");
+            }
+
+            // Remove last ,
+            Builder.Remove(Builder.Length - 1, 1);
+            Append(")");
+        }
         public override void VisitAssignment(Assignment node)
         {
             node.Left.Accept(this);

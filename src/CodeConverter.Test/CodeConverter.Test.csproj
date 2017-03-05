@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Languages\CSharp\ArrayCreation.cs" />
     <Compile Remove="Languages\CSharp\AssignString.cs" />
     <Compile Remove="Languages\CSharp\AssignVariable.cs" />
     <Compile Remove="Languages\CSharp\Cast.cs" />
@@ -25,6 +26,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Languages\PowerShell\ArrayCreation.ps1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Languages\CSharp\ArrayCreation.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Languages\CSharp\AssignString.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -74,6 +82,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Languages\CSharp\While.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\PowerShell\ArrayCreation.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
 
