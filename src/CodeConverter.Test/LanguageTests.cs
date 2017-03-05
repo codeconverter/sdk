@@ -37,6 +37,7 @@ namespace CSharpToPowerShell.Test
                 new ConversionTestCase("Cast", "Cast operator"),
                 new ConversionTestCase("For", "For loop"),
                 new ConversionTestCase("Foreach", "Foreach loop"),
+                new ConversionTestCase("Indexer", "Indexer property"),
                 new ConversionTestCase("If", "If, Else If, Else"),
                 new ConversionTestCase("MethodDeclaration", "Declare a method"),
                 new ConversionTestCase("MethodDeclarationWithArguments", "Declare a method with arguments"),
@@ -46,7 +47,8 @@ namespace CSharpToPowerShell.Test
                 new ConversionTestCase("PropertyAccess", "Access the property of a variable"),
                 new ConversionTestCase("Return", "Return statement"),
                 new ConversionTestCase("Snippet", "Declare a method outside of a class or namespace"),
-                new ConversionTestCase("TryCatchFinally", "Try, catch, finally")
+                new ConversionTestCase("TryCatchFinally", "Try, catch, finally"),
+                new ConversionTestCase("While", "While loop with break")
             };
         }
 

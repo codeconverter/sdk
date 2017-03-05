@@ -435,8 +435,13 @@ namespace CodeConverter.PowerShell
         {
             Append("while(");
             node.Condition.Accept(this);
-            Append("){");
+            Append(")");
+            NewLine();
+            Append("{");
+            Indent();
+            NewLine();
             node.Statement.Accept(this);
+            Outdent();
             Append("}");
         }
     }

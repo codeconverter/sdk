@@ -18,6 +18,9 @@ namespace CodeConverter.Test.Languages.CSharp
             var lt = 1 < 2;
             var ge = 1 >= 2;
             var le = 1 <= 2;
+            var plus = 1 + 1;
+            var minus = 1 - 1;
+            var bor = 1 | 1;
         }
     }
 }
