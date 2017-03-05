@@ -203,7 +203,7 @@
 
         public virtual void VisitReturnStatement(ReturnStatement node)
         {
-            
+            node.Expression.Accept(this);
         }
 
         public virtual void VisitVariableDeclaration(VariableDeclaration node)

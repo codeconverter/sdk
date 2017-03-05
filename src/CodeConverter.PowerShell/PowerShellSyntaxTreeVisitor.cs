@@ -219,7 +219,7 @@ namespace CodeConverter.PowerShell
 
         public override AstVisitAction VisitReturnStatement(ReturnStatementAst returnStatementAst)
         {
-            _currentNode = new ReturnStatement();
+            _currentNode = new ReturnStatement(null);
             return AstVisitAction.SkipChildren;
         }
 

@@ -184,21 +184,26 @@ namespace CodeConverter.PowerShell
                 }
             }
 
-            Append(";");
+            Append("; ");
 
             node.Condition.Accept(this);
 
-            Append(";");
+            Append("; ");
 
             foreach (var incrementor in node.Incrementors)
             {
                 incrementor.Accept(this);
             }
 
-            Append("){");
+            Append(")");
+            NewLine();
+            Append("{");
+            Indent();
+            NewLine();
 
             node.Statement.Accept(this);
 
+            Outdent();
             Append("}");
         }
 
@@ -208,8 +213,13 @@ namespace CodeConverter.PowerShell
             Append(node.Identifier);
             Append(" in ");
             node.Expression.Accept(this);
-            Append("){");
+            Append(")");
+            NewLine();
+            Append("{");
+            Indent();
+            NewLine();
             node.Statement.Accept(this);
+            Outdent();
             Append("}");
         }
 
@@ -386,6 +396,13 @@ namespace CodeConverter.PowerShell
         public override void VisitReturnStatement(ReturnStatement node)
         {
             Append("return");
+            
+            if (node.Expression != null)
+            {
+                Append(" ");
+                node.Expression.Accept(this);
+            }
+            
         }
 
         public override void VisitVariableDeclaration(VariableDeclaration node)

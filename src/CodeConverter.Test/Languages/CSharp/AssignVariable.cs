@@ -1,4 +1,4 @@
-﻿namespace CSharpToPowerShell.Test.Languages.CSharp
+﻿namespace CodeConverter.Test.Languages.CSharp
 {
     public class Class
     {

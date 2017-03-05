@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CSharpToPowerShell.Test.Languages.CSharp
+namespace CodeConverter.Test.Languages.CSharp
 {
     public class PropertyAccess
     {

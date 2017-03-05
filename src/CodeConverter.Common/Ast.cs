@@ -583,6 +583,12 @@ namespace CodeConverter.Common
 
     public class ReturnStatement : Node
     {
+        public ReturnStatement(Node expression)
+        {
+            Expression = expression;
+        }
+
+        public Node Expression { get; }
         public override void Accept(NodeVisitor visitor)
         {
             visitor.VisitReturnStatement(this);

@@ -8,8 +8,9 @@ namespace CodeConverter.Test.Languages.CSharp
 {
     public class Class
     {
-        public void Method(string argument, int integer)
+        public int Method()
         {
+            return 1;
         }
     }
 }

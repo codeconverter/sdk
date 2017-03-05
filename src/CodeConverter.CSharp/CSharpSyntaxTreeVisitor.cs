@@ -376,7 +376,8 @@ namespace CodeConverter.CSharp
 
         public override void VisitReturnStatement(ReturnStatementSyntax node)
         {
-            _currentNode = new ReturnStatement();
+            var expression = VisitSyntaxNode(node.Expression);
+            _currentNode = new ReturnStatement(expression);
         }
 
         public override void VisitVariableDeclaration(VariableDeclarationSyntax node)
