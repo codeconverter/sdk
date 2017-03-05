@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net461</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CodeConverter.Common\CodeConverter.Common.csproj" />
+    <ProjectReference Include="..\CodeConverter.CSharp\CodeConverter.CSharp.csproj" />
+    <ProjectReference Include="..\CodeConverter.PowerShell\CodeConverter.PowerShell.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+</Project>
