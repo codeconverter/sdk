@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <PackageId>codeconverter.powershell</PackageId>
+    <PackageId>CodeConverter.PowerShell</PackageId>
     <Authors>Adam Driscoll</Authors>
     <Company />
     <Product>CodeConverter.NET SDK</Product>
@@ -15,7 +15,7 @@
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>code conversion powershell</PackageTags>
     <PackageReleaseNotes>Initial release</PackageReleaseNotes>
-    <Version>1.0.0-alpha</Version>
+    <Version>1.0.1-alpha</Version>
   </PropertyGroup>
 
   <ItemGroup>

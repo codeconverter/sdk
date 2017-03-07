@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>
-    <PackageId>codeconverter.common</PackageId>
+    <PackageId>CodeConverter.Common</PackageId>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Authors>Adam Driscoll</Authors>
     <Company />
@@ -15,7 +15,7 @@
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>code conversion</PackageTags>
     <PackageReleaseNotes>Initial release</PackageReleaseNotes>
-    <Version>1.0.0-alpha</Version>
+    <Version>1.0.1-alpha</Version>
   </PropertyGroup>
 
   <ItemGroup>
