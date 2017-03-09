@@ -45,8 +45,18 @@ namespace CodeConverter.Common
 
         public override void VisitBlock(Block node)
         {
+            if (node == null)
+            {
+                return;
+            }
+
             foreach (var statement in node.Statements)
             {
+                if (statement == null)
+                {
+                    continue;
+                }
+
                 statement.Accept(this);
                 NewLine();
             }
@@ -229,6 +239,11 @@ namespace CodeConverter.Common
 
         public override void VisitMemberAccess(MemberAccess node)
         {
+            if (node == null || node.Expression == null)
+            {
+                return;
+            }
+
             node.Expression.Accept(this);
             Append(".");
             Append(node.Identifier);

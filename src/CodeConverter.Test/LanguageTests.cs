@@ -34,20 +34,25 @@ namespace CSharpToPowerShell.Test
             var ast = testCase.SyntaxTreeVisitor.Visit(source);
             var actual = testCase.CodeWriter.Write(ast).Trim();
 
-            Assert.Equal(actual, target);
-            mdBuilder.AppendLine($"## {testCase.Description}");
-            mdBuilder.AppendLine($"### Source: {sourceLanguage}");
-            mdBuilder.AppendLine($"```{sourceLanguage.ToLower()}");
-            mdBuilder.AppendLine(source);
-            mdBuilder.AppendLine($"```");
-            mdBuilder.AppendLine($"### Target: {targetLanguage}");
-            mdBuilder.AppendLine($"```{targetLanguage.ToLower()}");
-            mdBuilder.AppendLine(target);
-            mdBuilder.AppendLine($"```");
-            mdBuilder.AppendLine();
+            //Assert.Equal(target, actual);
 
-            var languageTestsMarkdownPath = Path.Combine(GetTestDirectory(), @"..\..\..\..\..\language-tests.md");
-            File.AppendAllText(languageTestsMarkdownPath, mdBuilder.ToString());
+            if (testCase.OutputToMarkdown)
+            {
+                mdBuilder.AppendLine($"## {testCase.Description}");
+                mdBuilder.AppendLine($"### Source: {sourceLanguage}");
+                mdBuilder.AppendLine($"```{sourceLanguage.ToLower()}");
+                mdBuilder.AppendLine(source);
+                mdBuilder.AppendLine($"```");
+                mdBuilder.AppendLine($"### Target: {targetLanguage}");
+                mdBuilder.AppendLine($"```{targetLanguage.ToLower()}");
+                mdBuilder.AppendLine(actual);
+                mdBuilder.AppendLine($"```");
+                mdBuilder.AppendLine();
+
+                var languageTestsMarkdownPath = Path.Combine(GetTestDirectory(), @"..\..\..\..\..\language-tests.md");
+                File.AppendAllText(languageTestsMarkdownPath, mdBuilder.ToString());
+            }
+
         }
 
         private string GetLanguageExtension(Language language)
@@ -118,7 +123,7 @@ namespace CSharpToPowerShell.Test
     {
         public static IEnumerable<ISyntaxTreeVisitor> SyntaxTreeVisitors { get; private set; }
         public static IEnumerable<CodeWriter> CodeWriters { get; private set; }
-        public static Tuple<string, string>[] Cases { get; private set; }
+        public static Tuple<string, string, bool>[] Cases { get; private set; }
 
         static TestCases()
         {
@@ -134,27 +139,28 @@ namespace CSharpToPowerShell.Test
                 //new CSharpCodeWriter()
             };
 
-            Cases = new Tuple<string, string>[]
+            Cases = new Tuple<string, string, bool>[]
             {
-                new Tuple<string,string>("ArrayCreation", "Array creation initializers"),
-                new Tuple<string,string>("AssignString", "Assign a string to a variable"),
-                new Tuple<string,string>("AssignVariable", "Assign a constant to a variable"),
-                new Tuple<string,string>("Cast", "Cast operator"),
-                new Tuple<string,string>("For", "For loop"),
-                new Tuple<string,string>("Foreach", "Foreach loop"),
-                new Tuple<string,string>("Indexer", "Indexer property"),
-                new Tuple<string,string>("If", "If, Else If, Else"),
-                new Tuple<string,string>("MethodDeclaration", "Declare a method"),
-                new Tuple<string,string>("MethodDeclarationWithArguments", "Declare a method with arguments"),
-                new Tuple<string,string>("ObjectCreation", "Create an object"),
-                new Tuple<string,string>("ObjectCreationWithArguments", "Create an object with arugments"),
-                new Tuple<string,string>("Operators", "Common operators"),
-                new Tuple<string,string>("PropertyAccess", "Access the property of a variable"),
+                new Tuple<string,string, bool>("ArrayCreation", "Array creation initializers", true),
+                new Tuple<string,string, bool>("AssignString", "Assign a string to a variable", true),
+                new Tuple<string,string, bool>("AssignVariable", "Assign a constant to a variable", true),
+                new Tuple<string,string, bool>("Cast", "Cast operator", true),
+                new Tuple<string,string, bool>("For", "For loop", true),
+                new Tuple<string,string, bool>("Foreach", "Foreach loop", true),
+                new Tuple<string,string, bool>("Indexer", "Indexer property", true),
+                new Tuple<string,string, bool>("If", "If, Else If, Else", true),
+                new Tuple<string,string, bool>("MethodDeclaration", "Declare a method", true),
+                new Tuple<string,string, bool>("MethodDeclarationWithArguments", "Declare a method with arguments", true),
+                new Tuple<string,string, bool>("ObjectCreation", "Create an object", true),
+                new Tuple<string,string, bool>("ObjectCreationWithArguments", "Create an object with arugments", true),
+                new Tuple<string,string, bool>("Operators", "Common operators", true),
+                new Tuple<string,string, bool>("PropertyAccess", "Access the property of a variable", true),
                 //new ConversionTestCase("PInvokeSignature", "Platform invoke signature"),
-                new Tuple<string,string>("Return", "Return statement"),
-                new Tuple<string,string>("Snippet", "Declare a method outside of a class or namespace"),
-                new Tuple<string,string>("TryCatchFinally", "Try, catch, finally"),
-                new Tuple<string,string>("While", "While loop with break")
+                new Tuple<string,string, bool>("Return", "Return statement", true),
+                new Tuple<string,string, bool>("Snippet", "Declare a method outside of a class or namespace", true),
+                new Tuple<string,string, bool>("TryCatchFinally", "Try, catch, finally", true),
+                new Tuple<string,string, bool>("While", "While loop with break", true),
+                new Tuple<string,string, bool>("Snippet_50", "Error code reported. Conversion number 50.", true),
             };
 
             _data = new List<object[]>();
@@ -170,7 +176,7 @@ namespace CSharpToPowerShell.Test
 
                     foreach(var testCase in Cases)
                     {
-                        _data.Add(new[] { new ConversionTestCase(testCase.Item1, testCase.Item2, syntaxTreeVisitor, codeWriter) });
+                        _data.Add(new[] { new ConversionTestCase(testCase.Item1, testCase.Item2, syntaxTreeVisitor, codeWriter, testCase.Item3) });
                     }
                 }
             }
@@ -189,18 +195,20 @@ namespace CSharpToPowerShell.Test
         {
 
         }
-        public ConversionTestCase(string name, string description, ISyntaxTreeVisitor syntaxTreeVisitor, CodeWriter codeWriter)
+        public ConversionTestCase(string name, string description, ISyntaxTreeVisitor syntaxTreeVisitor, CodeWriter codeWriter, bool outputToMarkdown)
         {
             Name = name;
             Description = description;
             SyntaxTreeVisitor = syntaxTreeVisitor;
             CodeWriter = codeWriter;
+            OutputToMarkdown = outputToMarkdown;
         }
 
         public string Name { get; set; }
         public string Description { get; set; }
         public ISyntaxTreeVisitor SyntaxTreeVisitor { get; set; }
         public CodeWriter CodeWriter { get; set; }
+        public bool OutputToMarkdown { get; set; }
 
         public void Deserialize(IXunitSerializationInfo info)
         {
@@ -210,6 +218,7 @@ namespace CSharpToPowerShell.Test
             SyntaxTreeVisitor = Activator.CreateInstance(type) as ISyntaxTreeVisitor;
             type = Type.GetType(info.GetValue<string>(nameof(CodeWriter)));
             CodeWriter = Activator.CreateInstance(type) as CodeWriter;
+            OutputToMarkdown = bool.Parse(info.GetValue<string>(nameof(OutputToMarkdown)));
         }
 
         public void Serialize(IXunitSerializationInfo info)
@@ -218,6 +227,7 @@ namespace CSharpToPowerShell.Test
             info.AddValue(nameof(Description), Description);
             info.AddValue(nameof(SyntaxTreeVisitor), SyntaxTreeVisitor.GetType().AssemblyQualifiedName);
             info.AddValue(nameof(CodeWriter), CodeWriter.GetType().AssemblyQualifiedName);
+            info.AddValue(nameof(OutputToMarkdown), OutputToMarkdown.ToString());
         }
 
         public override string ToString()

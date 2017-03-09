@@ -133,6 +133,7 @@ namespace CodeConverter.PowerShell
 
             Outdent();
             Append("}");
+            NewLine();
         }
 
         public override void VisitObjectCreation(ObjectCreation node)

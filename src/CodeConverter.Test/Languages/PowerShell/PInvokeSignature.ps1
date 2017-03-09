@@ -9,7 +9,7 @@
             [DllImport("advapi32.dll", SetLastError = true)]
             public static extern bool AbortSystemShutdown(string lpMachineName);
         }
-    ' 
+    '
 
     [advapi32]::AbortSystemShutdown($lpMachineName)
 }
