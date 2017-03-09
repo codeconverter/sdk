@@ -50,7 +50,7 @@ namespace CSharpToPowerShell.Test
             mdBuilder.AppendLine($"```");
             mdBuilder.AppendLine();
 
-            var languageTestsMarkdownPath = Path.Combine(GetTestDirectory(), @"..\..\..\language-tests.md");
+            var languageTestsMarkdownPath = Path.Combine(GetTestDirectory(), @"..\..\..\..\..\language-tests.md");
             File.AppendAllText(languageTestsMarkdownPath, mdBuilder.ToString());
         }
 
@@ -96,7 +96,7 @@ namespace CSharpToPowerShell.Test
     {
         public Fixture()
         {
-            var languageTestsMarkdownPath = Path.Combine(GetTestDirectory(), @"..\..\..\language-tests.md");
+            var languageTestsMarkdownPath = Path.Combine(GetTestDirectory(), @"..\..\..\..\..\language-tests.md");
             File.Delete(languageTestsMarkdownPath);
         }
 
