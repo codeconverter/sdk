@@ -126,7 +126,7 @@ namespace CodeConverter.PowerShell
             var parameters = new List<Parameter>();
             foreach(var parameter in functionDefinitionAst.Parameters)
             {
-                parameters.Add(new Parameter(parameter.StaticType.ToString(), parameter.Name.ToString()));
+                parameters.Add(new Parameter(parameter.StaticType?.ToString(), parameter.Name.ToString()));
             }
 
             _currentNode = new MethodDeclaration(name, parameters, body);
