@@ -205,6 +205,12 @@
             }
         }
 
+        public virtual void VisitUsing(Using node)
+        {
+            node.Declaration.Accept(this);
+            node.Expression.Accept(this);
+        }
+
         public virtual void VisitReturnStatement(ReturnStatement node)
         {
             node.Expression.Accept(this);

@@ -34,9 +34,7 @@ namespace CSharpToPowerShell.Test
             var ast = testCase.SyntaxTreeVisitor.Visit(source);
             var actual = testCase.CodeWriter.Write(ast).Trim();
 
-            //Assert.Equal(target, actual);
-
-            if (testCase.OutputToMarkdown)
+            if (testCase.OutputToMarkdown && target.Equals(actual))
             {
                 mdBuilder.AppendLine($"## {testCase.Description}");
                 mdBuilder.AppendLine($"### Source: {sourceLanguage}");
@@ -159,8 +157,9 @@ namespace CSharpToPowerShell.Test
                 new Tuple<string,string, bool>("Return", "Return statement", true),
                 new Tuple<string,string, bool>("Snippet", "Declare a method outside of a class or namespace", true),
                 new Tuple<string,string, bool>("TryCatchFinally", "Try, catch, finally", true),
+                new Tuple<string,string, bool>("Using", "Using statement", true),
                 new Tuple<string,string, bool>("While", "While loop with break", true),
-                new Tuple<string,string, bool>("Snippet_50", "Error code reported. Conversion number 50.", true),
+                new Tuple<string,string, bool>("Snippet_50", "Error code reported. Conversion number 50.", false),
             };
 
             _data = new List<object[]>();

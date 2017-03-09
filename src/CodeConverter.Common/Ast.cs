@@ -612,6 +612,21 @@ namespace CodeConverter.Common
         }
     }
 
+    public class Using : Node
+    {
+        public Using(Node expression, Node declaration)
+        {
+            Declaration = declaration;
+            Expression = expression;
+        }
+        public Node Declaration { get; }
+        public Node Expression { get; }
+        public override void Accept(NodeVisitor visitor)
+        {
+            visitor.VisitUsing(this);
+        }
+    }
+
     public class VariableDeclaration : Node
     {
         public VariableDeclaration(string type, params VariableDeclarator[] variables)

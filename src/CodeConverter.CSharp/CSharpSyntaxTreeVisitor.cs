@@ -387,6 +387,13 @@ namespace CodeConverter.CSharp
             _currentNode = new Try(block, catches, fin);
         }
 
+        public override void VisitUsingStatement(UsingStatementSyntax node)
+        {
+            var declaration = VisitSyntaxNode(node.Declaration);
+            var expression = VisitSyntaxNode(node.Statement);
+            _currentNode = new Using(expression, declaration);
+        }
+
         public override void VisitReturnStatement(ReturnStatementSyntax node)
         {
             var expression = VisitSyntaxNode(node.Expression);

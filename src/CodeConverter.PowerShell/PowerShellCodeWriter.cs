@@ -174,6 +174,12 @@ namespace CodeConverter.PowerShell
             Append("\'" + node.Value + "\'");
         }
 
+        public override void VisitUsing(Using node)
+        {
+            node.Declaration.Accept(this);
+            node.Expression.Accept(this);
+        }
+
         public override void VisitVariableDeclaration(VariableDeclaration node)
         {
             if (!string.IsNullOrEmpty(node.Type))

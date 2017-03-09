@@ -24,16 +24,21 @@
     <Compile Remove="Languages\CSharp\Snippet.cs" />
     <Compile Remove="Languages\CSharp\Snippet_50.cs" />
     <Compile Remove="Languages\CSharp\TryCatchFinally.cs" />
+    <Compile Remove="Languages\CSharp\Using.cs" />
     <Compile Remove="Languages\CSharp\While.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="Languages\PowerShell\ArrayCreation.ps1" />
     <None Remove="Languages\PowerShell\Snippet_50.ps1" />
+    <None Remove="Languages\PowerShell\Using.ps1" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Languages\CSharp\Snippet_50.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharp\Using.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Languages\PowerShell\PInvokeSignature.ps1">
@@ -152,6 +157,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Languages\PowerShell\TryCatchFinally.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\PowerShell\Using.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Languages\PowerShell\While.ps1">
