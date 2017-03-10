@@ -69,8 +69,11 @@
 
         public virtual void VisitClassDeclaration(ClassDeclaration node)
         {
+            if (node == null) return;
             foreach(var member in node.Members)
             {
+                if (member == null) continue;
+
                 member.Accept(this);
             }
         }
