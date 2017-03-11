@@ -612,6 +612,21 @@ namespace CodeConverter.Common
         }
     }
 
+    public class Unknown : Node
+    {
+        public Unknown(string message)
+        {
+            Message = message;
+        }
+
+        public string Message { get; set; }
+
+        public override void Accept(NodeVisitor visitor)
+        {
+            visitor.VisitUnknown(this);
+        }
+    }
+
     public class Using : Node
     {
         public Using(Node expression, Node declaration)

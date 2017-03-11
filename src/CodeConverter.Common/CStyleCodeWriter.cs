@@ -9,13 +9,13 @@ namespace CodeConverter.Common
         public override void VisitAssignment(Assignment node)
         {
             node.Left.Accept(this);
-            Append("=");
+            Append(" = ");
             node.Right.Accept(this);
         }
 
         public override void VisitArgument(Argument node)
         {
-            node.Expression.Accept(this);
+            node?.Expression?.Accept(this);
         }
 
         public override void VisitArgumentList(ArgumentList node)
@@ -304,6 +304,12 @@ namespace CodeConverter.Common
             }
 
         }
+
+        public override void VisitUnknown(Unknown unknown)
+        {
+            Append(unknown.Message);
+        }
+
 
         public override void VisitReturnStatement(ReturnStatement node)
         {

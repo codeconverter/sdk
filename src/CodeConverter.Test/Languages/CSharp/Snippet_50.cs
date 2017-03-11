@@ -1,1 +1,1 @@
-﻿bitMapImage.Save(mynewpath + "somefilename.png", ImageFormat.Png);
+﻿

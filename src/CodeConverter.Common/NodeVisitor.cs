@@ -208,6 +208,11 @@
             }
         }
 
+        public virtual void VisitUnknown(Unknown unknown)
+        {
+
+        }
+
         public virtual void VisitUsing(Using node)
         {
             node.Declaration.Accept(this);

@@ -34,7 +34,13 @@ namespace CSharpToPowerShell.Test
             var ast = testCase.SyntaxTreeVisitor.Visit(source);
             var actual = testCase.CodeWriter.Write(ast).Trim();
 
-            if (testCase.OutputToMarkdown && target.Equals(actual))
+            if (testCase.OutputToMarkdown)
+            {
+                Console.WriteLine(actual);
+                Assert.Equal(target, actual);
+            }
+
+            if (testCase.OutputToMarkdown)
             {
                 mdBuilder.AppendLine($"## {testCase.Description}");
                 mdBuilder.AppendLine($"### Source: {sourceLanguage}");

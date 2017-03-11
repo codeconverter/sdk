@@ -50,7 +50,16 @@ namespace CodeConverter.CSharp
 
         public Node VisitSyntaxNode(CSharpSyntaxNode node)
         {
+            if (node == null)
+            {
+                return null;
+            }
+
             Visit(node);
+
+            if (_currentNode == null)
+                _currentNode = new Unknown($"Unsupported node: {node.GetType()}");
+
             return _currentNode;
         }
 
@@ -389,7 +398,16 @@ namespace CodeConverter.CSharp
 
         public override void VisitUsingStatement(UsingStatementSyntax node)
         {
-            var declaration = VisitSyntaxNode(node.Declaration);
+            Node declaration = null;
+            if (node.Declaration != null)
+            {
+                declaration = VisitSyntaxNode(node.Declaration);
+            }
+            else if(node.Expression != null)
+            {
+                declaration = VisitSyntaxNode(node.Expression);
+            }
+
             var expression = VisitSyntaxNode(node.Statement);
             _currentNode = new Using(expression, declaration);
         }

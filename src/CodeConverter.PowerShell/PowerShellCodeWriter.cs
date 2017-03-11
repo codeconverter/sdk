@@ -176,8 +176,69 @@ namespace CodeConverter.PowerShell
 
         public override void VisitUsing(Using node)
         {
-            node.Declaration.Accept(this);
+            string variableName = null;
+            Node initializer = null;
+            var variableDeclaration = node.Declaration as VariableDeclaration;
+            if (variableDeclaration != null && variableDeclaration.Variables.Any())
+            {
+                var variableDeclartor = variableDeclaration.Variables.First();
+                if (!string.IsNullOrEmpty(variableDeclaration.Type))
+                {
+                    Append("[");
+                    Append(variableDeclaration.Type);
+                    Append("]");
+                }
+
+                variableName = variableDeclartor.Name;
+                initializer = variableDeclartor.Initializer;
+
+                Append("$");
+                Append(variableDeclartor.Name);
+                Append(" = $null");
+                NewLine();
+            }
+
+            var identifierName = node.Declaration as IdentifierName;
+            if (identifierName != null)
+            {
+                variableName = identifierName.Name;
+            }
+
+            Append("try");
+            NewLine();
+            Append("{");
+            Indent();
+            NewLine();
+
+            if (initializer != null)
+            {
+                Append("$");
+                Append(variableName);
+                Append(" = ");
+                initializer.Accept(this);
+                NewLine();
+            }
+
             node.Expression.Accept(this);
+            Outdent();
+            Append("}");
+            NewLine();
+            Append("finally");
+            NewLine();
+            Append("{");
+            Indent();
+            NewLine();
+
+            if (variableName != null)
+            {
+                Append("$");
+                Append(variableName);
+                Append(".Dispose()");
+                NewLine();
+            }
+
+            Outdent();
+            Append("}");
         }
 
         public override void VisitVariableDeclaration(VariableDeclaration node)
