@@ -129,7 +129,7 @@ namespace CodeConverter.PowerShell
                 parameters.Add(new Parameter(parameter.StaticType?.ToString(), parameter.Name.ToString()));
             }
 
-            _currentNode = new MethodDeclaration(name, parameters, body);
+            //_currentNode = new MethodDeclaration(name, parameters, body);
 
             return AstVisitAction.SkipChildren;
         }

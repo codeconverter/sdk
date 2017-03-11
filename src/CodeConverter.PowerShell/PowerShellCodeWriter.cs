@@ -129,7 +129,42 @@ namespace CodeConverter.PowerShell
                 NewLine();
             }
 
-            node.Body.Accept(this);
+            if (node.Modifiers.Contains("extern") && node.Attributes.Any(m => m.Name == "DllImport"))
+            {
+                Append("Add-Type -TypeDefinition '"); Indent(); NewLine();
+                Append("using System;"); NewLine();
+                Append("using System.Runtime.InteropServices;"); NewLine();
+                Append("public static class PInvoke {"); Indent(); NewLine();
+
+                foreach(var line in node.OriginalSource.Split('\r'))
+                {
+                    var trimmedLine = line.Trim();
+                    Append(trimmedLine);
+                    NewLine();
+                }
+
+                Outdent();
+                Append("}"); NewLine(); Outdent();
+                Append("'");
+                NewLine(); 
+                Append("[PInvoke]::"); Append(node.Name); Append("(");
+
+                foreach (var parameter in node.Parameters)
+                {
+                    if (parameter.Modifiers.Any(m => m == "ref" || m == "out"))
+                    {
+                        Append("[ref]");
+                    }
+                    Append("$"); Append(parameter.Name); Append(", ");
+                }
+
+                Builder.Remove(Builder.Length - 2, 2);
+                Append(")"); NewLine();
+            }
+            else
+            {
+                node.Body?.Accept(this);
+            }
 
             Outdent();
             Append("}");
@@ -158,6 +193,11 @@ namespace CodeConverter.PowerShell
 
         public override void VisitParameter(Parameter node)
         {
+            if (node.Modifiers.Any(m => m == "ref" || m == "out"))
+            {
+                Append("[ref]");
+            }
+
             if (!string.IsNullOrEmpty(node.Type))
             {
                 Append("[");

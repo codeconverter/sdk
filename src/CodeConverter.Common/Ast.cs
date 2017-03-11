@@ -11,6 +11,7 @@ namespace CodeConverter.Common
         public static CodeWriter DefaultCodeWriter { get; set; }
         public CodeWriter CodeWriter { get; set; }
         public Language SourceLanguage { get; }
+        public string OriginalSource { get; set; }
         public abstract void Accept(NodeVisitor visitor);
 
         public override string ToString()
@@ -131,6 +132,23 @@ namespace CodeConverter.Common
         public override void Accept(NodeVisitor visitor)
         {
             visitor.VisitArgumentList(this);
+        }
+    }
+
+    public class Attribute : Node
+    {
+        public Attribute(string name, ArgumentList argumentList)
+        {
+            ArgumentList = argumentList;
+            Name = name;
+        }
+
+        public ArgumentList ArgumentList { get; set; }
+        public string Name { get; set; }
+
+        public override void Accept(NodeVisitor visitor)
+        {
+            visitor.VisitAttribute(this);
         }
     }
 
@@ -432,16 +450,20 @@ namespace CodeConverter.Common
 
     public class MethodDeclaration : Node
     {
-        public MethodDeclaration(string name, IEnumerable<Parameter> parameters, Node body)
+        public MethodDeclaration(string name, IEnumerable<Parameter> parameters, Node body, IEnumerable<string> modifiers, IEnumerable<Attribute> attributes)
         {
             Name = name;
             Parameters = parameters;
             Body = body;
+            Modifiers = modifiers;
+            Attributes = attributes;
         }
 
         public string Name { get; }
         public IEnumerable<Parameter> Parameters { get; set; }
         public Node Body { get; }
+        public IEnumerable<string> Modifiers { get; set; }
+        public IEnumerable<Attribute> Attributes { get; set; }
 
         public override void Accept(NodeVisitor visitor)
         {
@@ -495,9 +517,19 @@ namespace CodeConverter.Common
         {
             Type = type;
             Name = name;
+            Modifiers = new string[0];
         }
+
+        public Parameter(string type, string name, IEnumerable<string> modifiers)
+        {
+            Type = type;
+            Name = name;
+            Modifiers = modifiers;
+        }
+
         public string Type { get; }
         public string Name { get; }
+        public IEnumerable<string> Modifiers { get; set; }
 
         public override void Accept(NodeVisitor visitor)
         {

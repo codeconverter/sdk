@@ -159,7 +159,7 @@ namespace CSharpToPowerShell.Test
                 new Tuple<string,string, bool>("ObjectCreationWithArguments", "Create an object with arugments", true),
                 new Tuple<string,string, bool>("Operators", "Common operators", true),
                 new Tuple<string,string, bool>("PropertyAccess", "Access the property of a variable", true),
-                //new ConversionTestCase("PInvokeSignature", "Platform invoke signature"),
+                new Tuple<string,string, bool>("PInvokeSignature", "Platform invoke signature", true),
                 new Tuple<string,string, bool>("Return", "Return statement", true),
                 new Tuple<string,string, bool>("Snippet", "Declare a method outside of a class or namespace", true),
                 new Tuple<string,string, bool>("TryCatchFinally", "Try, catch, finally", true),

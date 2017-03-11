@@ -3,6 +3,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
+using System.Linq;
 
 namespace CodeConverter.CSharp
 {
@@ -55,10 +56,14 @@ namespace CodeConverter.CSharp
                 return null;
             }
 
+            var originalSource = node.ToString();
+
             Visit(node);
 
             if (_currentNode == null)
                 _currentNode = new Unknown($"Unsupported node: {node.GetType()}");
+
+            _currentNode.OriginalSource = originalSource;
 
             return _currentNode;
         }
@@ -82,6 +87,13 @@ namespace CodeConverter.CSharp
             var right = VisitSyntaxNode(node.Right);
 
             _currentNode = new Assignment(left, right);
+        }
+
+        public override void VisitAttribute(AttributeSyntax node)
+        {
+            var list = VisitSyntaxNode(node.ArgumentList) as ArgumentList;
+
+            _currentNode = new Attribute(node.Name.ToString(), list);
         }
 
         public override void VisitArgument(ArgumentSyntax node)
@@ -334,9 +346,19 @@ namespace CodeConverter.CSharp
                 parameters.Add(VisitSyntaxNode(parameter) as Parameter);
             }
 
+            var modifiers = node.Modifiers.Select(m => m.ToString());
+
             var body = VisitSyntaxNode(node.Body);
 
-            _currentNode = new MethodDeclaration(name, parameters, body);
+            var attributes = new List<Attribute>();
+            foreach (var attribute in node.AttributeLists.SelectMany(m => m.Attributes))
+            {
+                var attributeNode = VisitSyntaxNode(attribute) as Attribute;
+                if (attributeNode != null)
+                    attributes.Add(attributeNode);
+            }
+
+            _currentNode = new MethodDeclaration(name, parameters, body, modifiers, attributes);
         }
 
         public override void VisitNamespaceDeclaration(NamespaceDeclarationSyntax node)
@@ -359,7 +381,9 @@ namespace CodeConverter.CSharp
 
         public override void VisitParameter(ParameterSyntax node)
         {
-            _currentNode = new Parameter(node.Type.ToString(), node.Identifier.ToString());
+            var modifiers = node.Modifiers.Select(m => m.ToString());
+
+            _currentNode = new Parameter(node.Type.ToString(), node.Identifier.ToString(), modifiers);
         }
 
         public override void VisitParenthesizedExpression(ParenthesizedExpressionSyntax node)

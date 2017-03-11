@@ -12,6 +12,11 @@
             node.Right.Accept(this);
         }
 
+        public virtual void VisitAttribute(Attribute node)
+        {
+            node.ArgumentList.Accept(this);
+        }
+
         public virtual void VisitArgument(Argument node)
         {
             node.Expression.Accept(this);
