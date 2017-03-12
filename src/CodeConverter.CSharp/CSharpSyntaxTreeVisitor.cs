@@ -9,6 +9,7 @@ namespace CodeConverter.CSharp
 {
     public class CSharpSyntaxTreeVisitor : ISyntaxTreeVisitor
     {
+        private bool _secondAttempt;
         public Language Language => Language.CSharp;
 
         public Node Visit(string code)
@@ -17,7 +18,17 @@ namespace CodeConverter.CSharp
 
             var root = tree.GetCompilationUnitRoot();
             var visitor = new Visitor();
-            root.Accept(visitor);
+
+            try
+            {
+                root.Accept(visitor);
+            }
+            catch (IncompleteCodeBlockException)
+            {
+                if (_secondAttempt) throw;
+                _secondAttempt = true;
+                return Visit($"void Method() {{ \r\n { code } \r\n }}");
+            }
 
             return visitor.Node;
         }
@@ -473,6 +484,11 @@ namespace CodeConverter.CSharp
             var statement = VisitSyntaxNode(node.Statement);
 
             _currentNode = new While(condition, statement);
+        }
+
+        public override void VisitIncompleteMember(IncompleteMemberSyntax node)
+        {
+            throw new IncompleteCodeBlockException();
         }
 
     }

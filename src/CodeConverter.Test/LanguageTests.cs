@@ -151,6 +151,7 @@ namespace CSharpToPowerShell.Test
                 new Tuple<string,string, bool>("Cast", "Cast operator", true),
                 new Tuple<string,string, bool>("For", "For loop", true),
                 new Tuple<string,string, bool>("Foreach", "Foreach loop", true),
+                new Tuple<string,string, bool>("IncompleteCodeBlock", "Converts an incomplete code block successfully.", true),
                 new Tuple<string,string, bool>("Indexer", "Indexer property", true),
                 new Tuple<string,string, bool>("If", "If, Else If, Else", true),
                 new Tuple<string,string, bool>("MethodDeclaration", "Declare a method", true),

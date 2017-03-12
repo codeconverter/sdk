@@ -12,6 +12,7 @@
     <Compile Remove="Languages\CSharp\For.cs" />
     <Compile Remove="Languages\CSharp\Foreach.cs" />
     <Compile Remove="Languages\CSharp\If.cs" />
+    <Compile Remove="Languages\CSharp\IncompleteCodeBlock.cs" />
     <Compile Remove="Languages\CSharp\Indexer.cs" />
     <Compile Remove="Languages\CSharp\MethodDeclaration.cs" />
     <Compile Remove="Languages\CSharp\MethodDeclarationWithArguments.cs" />
@@ -30,15 +31,22 @@
 
   <ItemGroup>
     <None Remove="Languages\PowerShell\ArrayCreation.ps1" />
+    <None Remove="Languages\PowerShell\IncompleteCodeBlock.ps1" />
     <None Remove="Languages\PowerShell\Snippet_50.ps1" />
     <None Remove="Languages\PowerShell\Using.ps1" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Languages\CSharp\IncompleteCodeBlock.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Languages\CSharp\Snippet_50.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Languages\CSharp\Using.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\PowerShell\IncompleteCodeBlock.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Languages\PowerShell\PInvokeSignature.ps1">

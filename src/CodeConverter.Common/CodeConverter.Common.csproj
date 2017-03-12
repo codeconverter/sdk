@@ -14,8 +14,8 @@
     <RepositoryUrl>https://github.com/codeconverter/sdk</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>code conversion</PackageTags>
-    <PackageReleaseNotes>Better usings support</PackageReleaseNotes>
-    <Version>1.0.5-alpha</Version>
+    <PackageReleaseNotes>Fixing an issue with incomplete code blocks in C#</PackageReleaseNotes>
+    <Version>1.0.7-alpha</Version>
   </PropertyGroup>
 
   <ItemGroup>
