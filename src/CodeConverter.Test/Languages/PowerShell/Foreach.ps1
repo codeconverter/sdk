@@ -4,5 +4,6 @@
 	foreach($item in $strings)
 	{
 		$str = $item
+		continue
 	}
 }

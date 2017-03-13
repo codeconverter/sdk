@@ -228,6 +228,11 @@ namespace CodeConverter.CSharp
             _currentNode = new Block(nodes);
         }
 
+        public override void VisitContinueStatement(ContinueStatementSyntax node)
+        {
+            _currentNode = new Continue();
+        }
+
         public override void DefaultVisit(SyntaxNode node)
         {
             _currentNode = null;

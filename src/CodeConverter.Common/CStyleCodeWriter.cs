@@ -101,6 +101,11 @@ namespace CodeConverter.Common
             Append(")");
         }
 
+        public override void VisitContinue(Continue node)
+        {
+            Append("continue");
+        }
+
         public override void VisitElseClause(ElseClause node)
         {
             NewLine();

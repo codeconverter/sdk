@@ -13,6 +13,7 @@ namespace CodeConverter.Test.Languages.CSharp
             foreach(var item in strings)
             {
                 var str = item;
+                continue;
             }
         }
     }
