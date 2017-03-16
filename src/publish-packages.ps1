@@ -1,5 +1,5 @@
-$version = "1.0.8-alpha"
-$releaseNotes = "Adding switch support"
+$version = "1.0.9-alpha"
+$releaseNotes = "Adding throw"
 
 $projects = @('CodeConverter.Common', 'CodeConverter.CSharp', 'CodeConverter.PowerShell', 'CodeConverter')
 

@@ -11,10 +11,10 @@
     <PackageProjectUrl>https://github.com/codeconverter/sdk</PackageProjectUrl>
     <RepositoryUrl>https://github.com/codeconverter/sdk</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
-    <PackageReleaseNotes>Adding switch support</PackageReleaseNotes>
+    <PackageReleaseNotes>Adding throw</PackageReleaseNotes>
     <PackageTags>code conversion</PackageTags>
     <PackageId>CodeConverter</PackageId>
-    <Version>1.0.8-alpha</Version>
+    <Version>1.0.9-alpha</Version>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\CodeConverter.Common\CodeConverter.Common.csproj" />
