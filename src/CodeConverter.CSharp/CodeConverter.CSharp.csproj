@@ -1,5 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
@@ -14,21 +13,17 @@
     <RepositoryUrl>https://github.com/codeconverter/sdk</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>code conversion csharp</PackageTags>
-    <PackageReleaseNotes>Fixing an issue with incomplete code blocks in C#</PackageReleaseNotes>
-    <Version>1.0.7-alpha</Version>
+    <PackageReleaseNotes>Adding switch support</PackageReleaseNotes>
+    <Version>1.0.8-alpha</Version>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\CodeConverter.Common\CodeConverter.Common.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <Folder Include="Properties\" />
     <Folder Include="Properties\" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="2.0.0-rc4" />
   </ItemGroup>
-
 </Project>

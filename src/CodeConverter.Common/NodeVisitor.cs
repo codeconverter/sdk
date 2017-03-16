@@ -199,6 +199,28 @@
 
         }
 
+        public virtual void VisitSwitchStatement(SwitchStatement node)
+        {
+            node.Expression.Accept(this);
+            foreach (var section in node.Sections)
+            {
+                section.Accept(this);
+            }
+        }
+
+        public virtual void VisitSwitchSection(SwitchSection node)
+        {
+            foreach(var label in node.Labels)
+            {
+                label.Accept(this);
+            }
+
+            foreach(var statement in node.Statements)
+            {
+                statement.Accept(this);
+            }
+        }
+
         public virtual void VisitTemplateStringConstant(TemplateStringConstant node)
         {
 

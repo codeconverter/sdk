@@ -72,7 +72,7 @@ namespace CodeConverter.CSharp
             Visit(node);
 
             if (_currentNode == null)
-                _currentNode = new Unknown($"Unsupported node: {node.GetType()}");
+                _currentNode = new Unknown($"Unsupported node: {node.GetType().Name}");
 
             _currentNode.OriginalSource = originalSource;
 
@@ -420,6 +420,48 @@ namespace CodeConverter.CSharp
             var operand = VisitSyntaxNode(node.Operand);
             var @operator = node.OperatorToken.Text;
             _currentNode = new PrefixUnaryExpression(operand, @operator);
+        }
+
+        public override void VisitSwitchStatement(SwitchStatementSyntax node)
+        {
+            var expression = VisitSyntaxNode(node.Expression);
+            var sections = new List<SwitchSection>();
+            foreach(var section in node.Sections)
+            {
+                sections.Add(VisitSyntaxNode(section) as SwitchSection);
+            }
+
+            _currentNode = new SwitchStatement(expression, sections);
+        }
+
+        public override void VisitCaseSwitchLabel(CaseSwitchLabelSyntax node)
+        {
+            _currentNode = VisitSyntaxNode(node.Value);
+        }
+
+        public override void VisitDefaultSwitchLabel(DefaultSwitchLabelSyntax node)
+        {
+            _currentNode = new Literal("default");
+        }
+
+        public override void VisitSwitchSection(SwitchSectionSyntax node)
+        {
+            var labels = new List<Node>();
+            foreach(var label in node.Labels)
+            {
+                var labelNode = VisitSyntaxNode(label);
+                if (labelNode != null)
+                    labels.Add(labelNode);
+            }
+            
+            var statements = new List<Node>();
+            foreach(var statement in node.Statements)
+            {
+                statements.Add(VisitSyntaxNode(statement));
+            }
+
+            _currentNode = new SwitchSection(labels, statements);
+            
         }
 
         public override void VisitTryStatement(TryStatementSyntax node)

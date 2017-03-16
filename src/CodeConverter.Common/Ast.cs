@@ -644,6 +644,40 @@ namespace CodeConverter.Common
         }
     }
 
+    public class SwitchStatement : Node
+    {
+        public SwitchStatement(Node expression, IEnumerable<SwitchSection> sections)
+        {
+            Expression = expression;
+            Sections = sections;
+        }
+
+        public Node Expression { get; set; }
+        public IEnumerable<SwitchSection> Sections { get; set; }
+
+        public override void Accept(NodeVisitor visitor)
+        {
+            visitor.VisitSwitchStatement(this);
+        }
+    }
+
+    public class SwitchSection : Node
+    {
+        public SwitchSection(IEnumerable<Node> labels, IEnumerable<Node> statements)
+        {
+            Labels = labels;
+            Statements = statements;
+        }
+
+        public IEnumerable<Node> Labels { get; set; }
+        public IEnumerable<Node> Statements { get; set; }
+
+        public override void Accept(NodeVisitor visitor)
+        {
+            visitor.VisitSwitchSection(this);
+        }
+    }
+
     public class Unknown : Node
     {
         public Unknown(string message)

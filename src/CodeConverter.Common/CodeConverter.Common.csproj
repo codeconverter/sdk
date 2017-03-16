@@ -1,5 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>
     <PackageId>CodeConverter.Common</PackageId>
@@ -14,12 +13,10 @@
     <RepositoryUrl>https://github.com/codeconverter/sdk</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>code conversion</PackageTags>
-    <PackageReleaseNotes>Fixing an issue with incomplete code blocks in C#</PackageReleaseNotes>
-    <Version>1.0.7-alpha</Version>
+    <PackageReleaseNotes>Adding switch support</PackageReleaseNotes>
+    <Version>1.0.8-alpha</Version>
   </PropertyGroup>
-
   <ItemGroup>
     <Folder Include="Properties\" />
   </ItemGroup>
-
 </Project>

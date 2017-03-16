@@ -1,5 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
@@ -14,23 +13,19 @@
     <RepositoryUrl>https://github.com/codeconverter/sdk</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>code conversion powershell</PackageTags>
-    <PackageReleaseNotes>Fixing an issue with incomplete code blocks in C#</PackageReleaseNotes>
-    <Version>1.0.7-alpha</Version>
+    <PackageReleaseNotes>Adding switch support</PackageReleaseNotes>
+    <Version>1.0.8-alpha</Version>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\CodeConverter.Common\CodeConverter.Common.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <Folder Include="Properties\" />
     <Folder Include="Properties\" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="System.Management.Automation">
       <HintPath>..\..\..\..\..\..\..\Windows\Microsoft.NET\assembly\GAC_MSIL\System.Management.Automation\v4.0_3.0.0.0__31bf3856ad364e35\System.Management.Automation.dll</HintPath>
     </Reference>
   </ItemGroup>
-
 </Project>

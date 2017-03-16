@@ -6,6 +6,7 @@ namespace CodeConverter.PowerShell
 {
     public class PowerShellCodeWriter : CStyleCodeWriter
     {
+        private bool _inSwitch;
         private static Dictionary<BinaryOperator, string> _operatorMap;
         protected override Dictionary<BinaryOperator, string> OperatorMap => _operatorMap;
         static PowerShellCodeWriter()
@@ -58,6 +59,13 @@ namespace CodeConverter.PowerShell
             Builder.Remove(Builder.Length - 1, 1);
 
             Append("]");
+        }
+
+        public override void VisitBreak(Break node)
+        {
+            if (_inSwitch) return;
+
+            base.VisitBreak(node);
         }
 
         public override void VisitCast(Cast node)
@@ -212,6 +220,41 @@ namespace CodeConverter.PowerShell
         public override void VisitStringConstant(StringConstant node)
         {
             Append("\'" + node.Value + "\'");
+        }
+
+        public override void VisitSwitchStatement(SwitchStatement node)
+        {
+            _inSwitch = true;
+            Append("switch (");
+            node.Expression.Accept(this);
+            Append(")"); NewLine();
+            Append("{"); Indent(); NewLine();
+
+            foreach(var section in node.Sections)
+            {
+                section.Accept(this);
+            }
+
+            Outdent();
+            Append("}");
+            _inSwitch = false;
+        }
+
+        public override void VisitSwitchSection(SwitchSection node)
+        {
+            foreach(var label in node.Labels)
+            {
+                label.Accept(this);
+                Append(" {"); Indent(); NewLine();
+                foreach(var statement in node.Statements)
+                {
+                    statement.Accept(this);
+                    NewLine();
+                }
+                Outdent();
+                Append("}");
+                NewLine();
+            }
         }
 
         public override void VisitUsing(Using node)
