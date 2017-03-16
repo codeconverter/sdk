@@ -226,6 +226,11 @@
 
         }
 
+        public virtual void VisitThrow(Throw node)
+        {
+            node.Statement.Accept(this);
+        }
+
         public virtual void VisitTry(Try node)
         {
             node.Block.Accept(this);

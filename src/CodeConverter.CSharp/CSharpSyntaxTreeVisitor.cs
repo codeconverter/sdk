@@ -464,6 +464,12 @@ namespace CodeConverter.CSharp
             
         }
 
+        public override void VisitThrowStatement(ThrowStatementSyntax node)
+        {
+            var statement = VisitSyntaxNode(node.Expression);
+            _currentNode = new Throw(statement);
+        }
+
         public override void VisitTryStatement(TryStatementSyntax node)
         {
             var block = VisitSyntaxNode(node.Block) as Block;

@@ -611,6 +611,21 @@ namespace CodeConverter.Common
             visitor.VisitTemplateStringConstant(this);
         }
     }
+
+    public class Throw :Node
+    {
+        public Throw(Node statement)
+        {
+            Statement = statement;
+        }
+
+        public Node Statement { get; set; }
+
+        public override void Accept(NodeVisitor visitor)
+        {
+            visitor.VisitThrow(this);
+        }
+    }
     
     public class Try : Node
     {

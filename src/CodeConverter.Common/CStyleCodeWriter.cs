@@ -283,6 +283,11 @@ namespace CodeConverter.Common
             Append("\"" + node.Value + "\"");
         }
 
+        public override void VisitThrow(Throw node)
+        {
+            Append("throw ");
+            node.Statement.Accept(this);
+        }
 
         public override void VisitTry(Try node)
         {

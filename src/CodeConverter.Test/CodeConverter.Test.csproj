@@ -25,6 +25,7 @@
     <Compile Remove="Languages\CSharp\Snippet.cs" />
     <Compile Remove="Languages\CSharp\Snippet_50.cs" />
     <Compile Remove="Languages\CSharp\Switch.cs" />
+    <Compile Remove="Languages\CSharp\Throw.cs" />
     <Compile Remove="Languages\CSharp\TryCatchFinally.cs" />
     <Compile Remove="Languages\CSharp\Using.cs" />
     <Compile Remove="Languages\CSharp\While.cs" />
@@ -35,6 +36,7 @@
     <None Remove="Languages\PowerShell\IncompleteCodeBlock.ps1" />
     <None Remove="Languages\PowerShell\Snippet_50.ps1" />
     <None Remove="Languages\PowerShell\Switch.ps1" />
+    <None Remove="Languages\PowerShell\Throw.ps1" />
     <None Remove="Languages\PowerShell\Using.ps1" />
   </ItemGroup>
 
@@ -46,6 +48,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Languages\CSharp\Switch.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharp\Throw.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Languages\CSharp\Using.cs">
@@ -170,6 +175,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Languages\PowerShell\Switch.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\PowerShell\Throw.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Languages\PowerShell\TryCatchFinally.ps1">

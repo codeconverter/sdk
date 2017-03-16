@@ -164,6 +164,7 @@ namespace CSharpToPowerShell.Test
                 new Tuple<string,string, bool>("Return", "Return statement", true),
                 new Tuple<string,string, bool>("Snippet", "Declare a method outside of a class or namespace", true),
                 new Tuple<string,string, bool>("Switch", "Switch statement", true),
+                new Tuple<string,string, bool>("Throw", "Throw statement", true),
                 new Tuple<string,string, bool>("TryCatchFinally", "Try, catch, finally", true),
                 new Tuple<string,string, bool>("Using", "Using statement", true),
                 new Tuple<string,string, bool>("While", "While loop with break", true),
