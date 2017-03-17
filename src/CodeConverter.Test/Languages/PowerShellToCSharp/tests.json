@@ -1,0 +1,14 @@
+﻿{
+  "Source": "PowerShell",
+  "Target": "CSharp",
+  "TestCases": [
+    {
+      "Name": "ArrayCreation",
+      "Description": "Array creation initializers"
+    },
+    {
+      "Name": "AssignVariable",
+      "Description": "Assign a constant to a variable"
+    }
+  ]
+}

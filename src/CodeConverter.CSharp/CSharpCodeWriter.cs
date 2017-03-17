@@ -11,7 +11,30 @@ namespace CodeConverter.CSharp
 
         protected override Dictionary<BinaryOperator, string> OperatorMap => throw new NotImplementedException();
 
-        public override void VisitMethodDeclaration(MethodDeclaration node)
+		public CSharpCodeWriter()
+		{
+			TerminateStatementWithSemiColon = true;
+		}
+
+		public override void VisitArrayCreation(ArrayCreation node)
+		{
+			Append("new ");
+			Append(node.Type);
+			Append("[] { ");
+			foreach(var element in node.Initializer)
+			{
+				element.Accept(this);
+
+				Append(", ");
+			}
+
+			//Remove trailing comma
+			Builder.Remove(Builder.Length - 2, 2);
+
+			Append(" }");
+		}
+
+		public override void VisitMethodDeclaration(MethodDeclaration node)
         {
             Append("void ");
             Append(node.Name);
@@ -34,6 +57,7 @@ namespace CodeConverter.CSharp
             NewLine();
 
             node.Body.Accept(this);
+            NewLine();
 
             Outdent();
             Append("}");

@@ -5,193 +5,215 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Languages\CSharp\ArrayCreation.cs" />
-    <Compile Remove="Languages\CSharp\AssignString.cs" />
-    <Compile Remove="Languages\CSharp\AssignVariable.cs" />
-    <Compile Remove="Languages\CSharp\Cast.cs" />
-    <Compile Remove="Languages\CSharp\For.cs" />
-    <Compile Remove="Languages\CSharp\Foreach.cs" />
-    <Compile Remove="Languages\CSharp\If.cs" />
-    <Compile Remove="Languages\CSharp\IncompleteCodeBlock.cs" />
-    <Compile Remove="Languages\CSharp\Indexer.cs" />
-    <Compile Remove="Languages\CSharp\MethodDeclaration.cs" />
-    <Compile Remove="Languages\CSharp\MethodDeclarationWithArguments.cs" />
-    <Compile Remove="Languages\CSharp\ObjectCreation.cs" />
-    <Compile Remove="Languages\CSharp\ObjectCreationWithArguments.cs" />
-    <Compile Remove="Languages\CSharp\Operators.cs" />
-    <Compile Remove="Languages\CSharp\PInvokeSignature.cs" />
-    <Compile Remove="Languages\CSharp\PropertyAccess.cs" />
-    <Compile Remove="Languages\CSharp\Return.cs" />
-    <Compile Remove="Languages\CSharp\Snippet.cs" />
-    <Compile Remove="Languages\CSharp\Snippet_50.cs" />
-    <Compile Remove="Languages\CSharp\Switch.cs" />
-    <Compile Remove="Languages\CSharp\Throw.cs" />
-    <Compile Remove="Languages\CSharp\TryCatchFinally.cs" />
-    <Compile Remove="Languages\CSharp\Using.cs" />
-    <Compile Remove="Languages\CSharp\While.cs" />
+    <Compile Remove="Languages\CSharpToPowerShell\CSharp\ArrayCreation.cs" />
+    <Compile Remove="Languages\CSharpToPowerShell\CSharp\AssignVariable.cs" />
+    <Compile Remove="Languages\CSharpToPowerShell\CSharp\Cast.cs" />
+    <Compile Remove="Languages\CSharpToPowerShell\CSharp\For.cs" />
+    <Compile Remove="Languages\CSharpToPowerShell\CSharp\Foreach.cs" />
+    <Compile Remove="Languages\CSharpToPowerShell\CSharp\If.cs" />
+    <Compile Remove="Languages\CSharpToPowerShell\CSharp\IncompleteCodeBlock.cs" />
+    <Compile Remove="Languages\CSharpToPowerShell\CSharp\Indexer.cs" />
+    <Compile Remove="Languages\CSharpToPowerShell\CSharp\MethodDeclaration.cs" />
+    <Compile Remove="Languages\CSharpToPowerShell\CSharp\MethodDeclarationWithArguments.cs" />
+    <Compile Remove="Languages\CSharpToPowerShell\CSharp\ObjectCreation.cs" />
+    <Compile Remove="Languages\CSharpToPowerShell\CSharp\ObjectCreationWithArguments.cs" />
+    <Compile Remove="Languages\CSharpToPowerShell\CSharp\Operators.cs" />
+    <Compile Remove="Languages\CSharpToPowerShell\CSharp\PInvokeSignature.cs" />
+    <Compile Remove="Languages\CSharpToPowerShell\CSharp\PropertyAccess.cs" />
+    <Compile Remove="Languages\CSharpToPowerShell\CSharp\Return.cs" />
+    <Compile Remove="Languages\CSharpToPowerShell\CSharp\Snippet.cs" />
+    <Compile Remove="Languages\CSharpToPowerShell\CSharp\Snippet_50.cs" />
+    <Compile Remove="Languages\CSharpToPowerShell\CSharp\Switch.cs" />
+    <Compile Remove="Languages\CSharpToPowerShell\CSharp\Throw.cs" />
+    <Compile Remove="Languages\CSharpToPowerShell\CSharp\TryCatchFinally.cs" />
+    <Compile Remove="Languages\CSharpToPowerShell\CSharp\Using.cs" />
+    <Compile Remove="Languages\CSharpToPowerShell\CSharp\While.cs" />
+    <Compile Remove="Languages\PowerShellToCSharp\CSharp\ArrayCreation.cs" />
+    <Compile Remove="Languages\PowerShellToCSharp\CSharp\AssignVariable.cs" />
+    <Compile Remove="Languages\PowerShellToCSharp\CSharp\Cast.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Languages\PowerShell\ArrayCreation.ps1" />
-    <None Remove="Languages\PowerShell\IncompleteCodeBlock.ps1" />
-    <None Remove="Languages\PowerShell\Snippet_50.ps1" />
-    <None Remove="Languages\PowerShell\Switch.ps1" />
-    <None Remove="Languages\PowerShell\Throw.ps1" />
-    <None Remove="Languages\PowerShell\Using.ps1" />
+    <None Remove="Languages\CSharpToPowerShell\PowerShell\ArrayCreation.ps1" />
+    <None Remove="Languages\CSharpToPowerShell\PowerShell\IncompleteCodeBlock.ps1" />
+    <None Remove="Languages\CSharpToPowerShell\PowerShell\Snippet_50.ps1" />
+    <None Remove="Languages\CSharpToPowerShell\PowerShell\Switch.ps1" />
+    <None Remove="Languages\CSharpToPowerShell\PowerShell\Throw.ps1" />
+    <None Remove="Languages\CSharpToPowerShell\PowerShell\Using.ps1" />
+    <None Remove="Languages\CSharpToPowerShell\tests.json" />
+    <None Remove="Languages\PowerShellToCSharp\tests.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Languages\CSharp\IncompleteCodeBlock.cs">
+    <Content Include="Languages\CSharpToPowerShell\CSharp\AssignVariable.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Languages\CSharp\Snippet_50.cs">
+    <Content Include="Languages\CSharpToPowerShell\CSharp\IncompleteCodeBlock.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Languages\CSharp\Switch.cs">
+    <Content Include="Languages\CSharpToPowerShell\CSharp\Snippet_50.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Languages\CSharp\Throw.cs">
+    <Content Include="Languages\CSharpToPowerShell\CSharp\Switch.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Languages\CSharp\Using.cs">
+    <Content Include="Languages\CSharpToPowerShell\CSharp\Throw.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Languages\PowerShell\IncompleteCodeBlock.ps1">
+    <Content Include="Languages\CSharpToPowerShell\CSharp\Using.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Languages\PowerShell\PInvokeSignature.ps1">
+    <Content Include="Languages\CSharpToPowerShell\PowerShell\IncompleteCodeBlock.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Languages\CSharp\ArrayCreation.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Languages\CSharp\AssignString.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Languages\CSharp\AssignVariable.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Languages\CSharp\Cast.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Languages\CSharp\For.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Languages\CSharp\Foreach.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Languages\CSharp\If.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Languages\CSharp\Indexer.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Languages\CSharp\MethodDeclaration.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Languages\CSharp\MethodDeclarationWithArguments.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Languages\CSharp\ObjectCreation.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Languages\CSharp\ObjectCreationWithArguments.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Languages\CSharp\Operators.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Languages\CSharp\PInvokeSignature.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Languages\CSharp\PropertyAccess.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Languages\CSharp\Return.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Languages\CSharp\Snippet.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Languages\CSharp\TryCatchFinally.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Languages\CSharp\While.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Languages\PowerShell\ArrayCreation.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-
-    <Content Include="Languages\PowerShell\AssignString.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Languages\PowerShell\AssignVariable.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Languages\PowerShell\Cast.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Languages\PowerShell\For.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Languages\PowerShell\Foreach.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Languages\PowerShell\If.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Languages\PowerShell\Indexer.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Languages\PowerShell\MethodDeclaration.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Languages\PowerShell\MethodDeclarationWithArguments.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Languages\PowerShell\ObjectCreation.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Languages\PowerShell\ObjectCreationWithArguments.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Languages\PowerShell\Operators.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Languages\PowerShell\PropertyAccess.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Languages\PowerShell\Return.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Languages\PowerShell\Snippet.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Languages\PowerShell\Snippet_50.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Languages\PowerShell\Switch.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Languages\PowerShell\Throw.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Languages\PowerShell\TryCatchFinally.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Languages\PowerShell\Using.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Languages\PowerShell\While.ps1">
+    <Content Include="Languages\CSharpToPowerShell\PowerShell\PInvokeSignature.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Languages\CSharpToPowerShell\CSharp\ArrayCreation.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharpToPowerShell\tests.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\PowerShellToCSharp\CSharp\ArrayCreation.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\PowerShellToCSharp\CSharp\AssignVariable.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharpToPowerShell\CSharp\Cast.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharpToPowerShell\CSharp\For.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharpToPowerShell\CSharp\Foreach.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharpToPowerShell\CSharp\If.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharpToPowerShell\CSharp\Indexer.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharpToPowerShell\CSharp\MethodDeclaration.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharpToPowerShell\CSharp\MethodDeclarationWithArguments.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharpToPowerShell\CSharp\ObjectCreation.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharpToPowerShell\CSharp\ObjectCreationWithArguments.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharpToPowerShell\CSharp\Operators.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharpToPowerShell\CSharp\PInvokeSignature.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharpToPowerShell\CSharp\PropertyAccess.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharpToPowerShell\CSharp\Return.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharpToPowerShell\CSharp\Snippet.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharpToPowerShell\CSharp\TryCatchFinally.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharpToPowerShell\CSharp\While.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharpToPowerShell\PowerShell\ArrayCreation.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharpToPowerShell\PowerShell\AssignVariable.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharpToPowerShell\PowerShell\Cast.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharpToPowerShell\PowerShell\For.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharpToPowerShell\PowerShell\Foreach.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharpToPowerShell\PowerShell\If.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharpToPowerShell\PowerShell\Indexer.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharpToPowerShell\PowerShell\MethodDeclaration.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharpToPowerShell\PowerShell\MethodDeclarationWithArguments.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharpToPowerShell\PowerShell\ObjectCreation.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharpToPowerShell\PowerShell\ObjectCreationWithArguments.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharpToPowerShell\PowerShell\Operators.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharpToPowerShell\PowerShell\PropertyAccess.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharpToPowerShell\PowerShell\Return.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharpToPowerShell\PowerShell\Snippet.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharpToPowerShell\PowerShell\Snippet_50.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharpToPowerShell\PowerShell\Switch.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharpToPowerShell\PowerShell\Throw.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharpToPowerShell\PowerShell\TryCatchFinally.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharpToPowerShell\PowerShell\Using.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharpToPowerShell\PowerShell\While.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\PowerShellToCSharp\CSharp\Cast.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\PowerShellToCSharp\PowerShell\ArrayCreation.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\PowerShellToCSharp\PowerShell\AssignVariable.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\PowerShellToCSharp\PowerShell\Cast.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\PowerShellToCSharp\tests.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.1-beta1" />
     <PackageReference Include="xunit" Version="2.2.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
   </ItemGroup>

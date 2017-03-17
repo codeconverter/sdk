@@ -1,4 +1,5 @@
 ﻿using CodeConverter.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation.Language;
@@ -39,11 +40,37 @@ namespace CodeConverter.PowerShell
             node.Visit(this);
             return _currentNode;
         }
+		public override AstVisitAction VisitArrayLiteral(ArrayLiteralAst arrayLiteralAst)
+		{
+			var elements = new List<Node>();
+			foreach(var element in arrayLiteralAst.Elements)
+			{
+				elements.Add(VisitSyntaxNode(element));
+			}
 
-        public override AstVisitAction VisitAssignmentStatement(AssignmentStatementAst assignmentStatementAst)
+			_currentNode = new ArrayCreation(elements, string.Empty);
+
+			return AstVisitAction.SkipChildren;
+		}
+
+		public override AstVisitAction VisitAssignmentStatement(AssignmentStatementAst assignmentStatementAst)
         {
-            var left = VisitSyntaxNode(assignmentStatementAst.Left);
-            var right = VisitSyntaxNode(assignmentStatementAst.Right);
+			if (assignmentStatementAst.Left is ConvertExpressionAst)
+			{
+				var varExpression = assignmentStatementAst.Left as ConvertExpressionAst;
+				if (varExpression.Attribute != null && varExpression.Child is VariableExpressionAst)
+				{
+					var typeName = varExpression.Attribute.TypeName.Name;
+					var name = (varExpression.Child as VariableExpressionAst).VariablePath.ToString();
+					var initializer = VisitSyntaxNode(assignmentStatementAst.Right);
+					_currentNode = new VariableDeclaration(typeName, new VariableDeclarator(name, initializer));
+
+					return AstVisitAction.SkipChildren;
+				}
+			}
+
+			var left = VisitSyntaxNode(assignmentStatementAst.Left);
+			var right = VisitSyntaxNode(assignmentStatementAst.Right);
             _currentNode = new Assignment(left, right);
 
             return AstVisitAction.SkipChildren;
@@ -124,12 +151,17 @@ namespace CodeConverter.PowerShell
             var body = VisitSyntaxNode(functionDefinitionAst.Body);
             var name = functionDefinitionAst.Name;
             var parameters = new List<Parameter>();
-            foreach(var parameter in functionDefinitionAst.Parameters)
-            {
-                parameters.Add(new Parameter(parameter.StaticType?.ToString(), parameter.Name.ToString()));
-            }
 
-            //_currentNode = new MethodDeclaration(name, parameters, body);
+            if (functionDefinitionAst.Parameters != null)
+            {
+                foreach (var parameter in functionDefinitionAst.Parameters)
+                {
+                    parameters.Add(new Parameter(parameter.StaticType?.ToString(), parameter.Name.ToString()));
+                }
+            }
+           
+
+            _currentNode = new MethodDeclaration(name, parameters, body, new[] { "public" }, new CodeConverter.Common.Attribute[0]);
 
             return AstVisitAction.SkipChildren;
         }
@@ -231,7 +263,15 @@ namespace CodeConverter.PowerShell
                 statements.Add(VisitSyntaxNode(statement));
             }
 
-            _currentNode = new Block(statements);
+			if (statements.Count() == 1)
+			{
+				_currentNode = statements.FirstOrDefault();
+			}
+			else
+			{
+				_currentNode = new Block(statements);
+			}
+            
 
             return AstVisitAction.SkipChildren;
         }
@@ -291,6 +331,13 @@ namespace CodeConverter.PowerShell
         {
             var expression = VisitSyntaxNode(parenExpressionAst.Pipeline);
             _currentNode = new ParenthesizedExpression(expression);
+            return AstVisitAction.SkipChildren;
+        }
+
+        public override AstVisitAction VisitVariableExpression(VariableExpressionAst variableExpressionAst)
+        {
+            var variableName = variableExpressionAst.VariablePath.ToString();
+            _currentNode = new IdentifierName(variableName);
             return AstVisitAction.SkipChildren;
         }
     }

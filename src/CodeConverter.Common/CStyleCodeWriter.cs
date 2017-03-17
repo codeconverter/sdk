@@ -5,12 +5,16 @@ namespace CodeConverter.Common
 {
     public abstract class CStyleCodeWriter : CodeWriter
     {
+		protected bool TerminateStatementWithSemiColon { get; set; }
         protected abstract Dictionary<BinaryOperator, string> OperatorMap { get; }
         public override void VisitAssignment(Assignment node)
         {
             node.Left.Accept(this);
             Append(" = ");
             node.Right.Accept(this);
+
+			if (TerminateStatementWithSemiColon)
+				Append(";");
         }
 
         public override void VisitArgument(Argument node)
@@ -346,5 +350,33 @@ namespace CodeConverter.Common
             Outdent();
             Append("}");
         }
-    }
+
+		public override void VisitVariableDeclaration(VariableDeclaration node)
+		{
+			if (!string.IsNullOrEmpty(node.Type))
+			{
+				Append(node.Type);
+				Append(" ");
+			}
+
+			foreach (var variable in node.Variables)
+			{
+				VisitVariableDeclarator(variable);
+			}
+		}
+
+		public override void VisitVariableDeclarator(VariableDeclarator node)
+		{
+			Append(node.Name);
+			if (node.Initializer != null)
+			{
+				Append(" = ");
+				node.Initializer.Accept(this);
+
+			}
+
+			if (TerminateStatementWithSemiColon)
+				Append(";");
+		}
+	}
 }

@@ -19,7 +19,7 @@ namespace CodeConverter.Common
         /// <summary>
         /// The character used for indentation. Usually spaces vs tabs.
         /// </summary>
-        public string IndentationCharacter { get; } = "\t";
+        public string IndentationCharacter { get; set; } = "\t";
 
         /// <summary>
         /// Writes an abstract syntax tree to a string.
