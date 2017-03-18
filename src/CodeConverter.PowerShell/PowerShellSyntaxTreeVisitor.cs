@@ -169,7 +169,13 @@ namespace CodeConverter.PowerShell
 				if (typeName == null)
 					return node;
 
-				return new ObjectCreation(typeName.Value, argumentListArgs?.Expression as ArgumentList);
+				var argList = argumentListArgs?.Expression as ArgumentList;
+				if (argumentListArgs != null && argList == null)
+				{
+					argList = new ArgumentList(argumentListArgs?.Expression);
+				}
+
+				return new ObjectCreation(typeName.Value, argList);
 			}
 
 			return node;

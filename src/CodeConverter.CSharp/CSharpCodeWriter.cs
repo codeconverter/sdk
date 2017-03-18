@@ -29,7 +29,7 @@ namespace CodeConverter.CSharp
 			//Remove trailing comma
 			Builder.Remove(Builder.Length - 2, 2);
 
-			Append(" }");
+			Append(" };");
 		}
 
 		public override void VisitObjectCreation(ObjectCreation node)
@@ -91,9 +91,15 @@ namespace CodeConverter.CSharp
             Indent();
             NewLine();
 
-            node.Body.Accept(this);
+			var block = node.Body as Block;
+			if (block == null)
+			{
+				block = new Block(node.Body);
+			}
+			
+			block.Accept(this);
 
-            Outdent();
+			Outdent();
             Append("}");
         }
     }

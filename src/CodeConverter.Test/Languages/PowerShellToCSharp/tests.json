@@ -37,6 +37,14 @@
     {
       "Name": "MethodDeclarationWithArguments",
       "Description": "Declare a method with arguments"
+    },
+    {
+      "Name": "ObjectCreation",
+      "Description": "Create an object"
+    },
+    {
+      "Name": "ObjectCreationWithArguments",
+      "Description": "Create an object with arugments"
     }
   ]
 }

@@ -34,9 +34,6 @@ namespace CodeConverter.Common
             node.Left.Accept(this);
             Append(" = ");
             node.Right.Accept(this);
-
-			if (TerminateStatementWithSemiColon)
-				Append(";");
         }
 
         public override void VisitArgument(Argument node)
@@ -84,6 +81,12 @@ namespace CodeConverter.Common
                 }
 
                 statement.Accept(this);
+
+				if (TerminateStatementWithSemiColon && Builder[Builder.Length - 1] != '}' && Builder[Builder.Length - 1] != ';')
+				{
+					Append(";");
+				}
+
                 NewLine();
             }
         }
@@ -130,9 +133,6 @@ namespace CodeConverter.Common
         public override void VisitContinue(Continue node)
         {
             Append("continue");
-
-			if (TerminateStatementWithSemiColon)
-				Append(";");
         }
 
 		public override void VisitBracketedArgumentList(BracketedArgumentList node)
@@ -209,11 +209,7 @@ namespace CodeConverter.Common
                 }
             }
 
-			// Statement will already have a semicolon on the end.
-			if (TerminateStatementWithSemiColon)
-				Append(" ");
-			else
-				Append("; ");
+			Append("; ");
 
             node.Condition.Accept(this);
 
@@ -447,11 +443,7 @@ namespace CodeConverter.Common
 			{
 				Append(" = ");
 				node.Initializer.Accept(this);
-				
 			}
-
-			if (TerminateStatementWithSemiColon)
-				Append(";");
 		}
 	}
 }
