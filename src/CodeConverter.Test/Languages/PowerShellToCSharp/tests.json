@@ -61,6 +61,14 @@
     {
       "Name": "Switch",
       "Description": "Switch statement"
+    },
+    {
+      "Name": "Throw",
+      "Description": "Throw statement"
+    },
+    {
+      "Name": "TryCatchFinally",
+      "Description": "Try, catch, finally"
     }
   ]
 }

@@ -120,15 +120,21 @@ namespace CodeConverter.PowerShell
         public override AstVisitAction VisitCatchClause(CatchClauseAst catchClauseAst)
         {
             var body = VisitSyntaxNode(catchClauseAst.Body);
+			var block = body as Block;
+			if (block == null)
+			{
+				block = new Block(body);
+			}
+
             var type = catchClauseAst.CatchTypes.FirstOrDefault();
             CatchDeclaration declaration = null;
             if (type != null)
             {
-                var myType = VisitSyntaxNode(type);
+				var myType = type.TypeName.Name;
                 declaration = new CatchDeclaration(myType.ToString(), null);
             }
 
-            _currentNode = new Catch(declaration, body as Block);
+            _currentNode = new Catch(declaration, block);
 
             return AstVisitAction.SkipChildren;
         }
@@ -459,7 +465,12 @@ namespace CodeConverter.PowerShell
 
 		public override AstVisitAction VisitTryStatement(TryStatementAst tryStatementAst)
         {
-            var tryBody = VisitSyntaxNode(tryStatementAst.Body) as Block;
+            var tryBody = VisitSyntaxNode(tryStatementAst.Body);
+			var body = tryBody as Block;
+			if (body == null)
+			{
+				body = new Block(tryBody);
+			}
 
             var catches = new List<Catch>();
             foreach(var catchClause in  tryStatementAst.CatchClauses)
@@ -468,14 +479,30 @@ namespace CodeConverter.PowerShell
                 catches.Add(catchNode);
             }
 
-            var fin = VisitSyntaxNode(tryStatementAst.Finally) as Finally;
+            var fin = VisitSyntaxNode(tryStatementAst.Finally);
+			var finBody = fin as Block;
+			if (finBody == null)
+			{
+				finBody = new Block(fin);
+			}
 
-            _currentNode = new Try(tryBody, catches, fin);
+			var fina = new Finally(finBody);
+
+            _currentNode = new Try(body, catches, fina);
 
             return AstVisitAction.SkipChildren;
         }
 
-        public override AstVisitAction VisitUnaryExpression(UnaryExpressionAst unaryExpressionAst)
+		public override AstVisitAction VisitThrowStatement(ThrowStatementAst throwStatementAst)
+		{
+			var expression = VisitSyntaxNode(throwStatementAst.Pipeline);
+
+			_currentNode = new Throw(expression);
+
+			return AstVisitAction.SkipChildren;
+		}
+
+		public override AstVisitAction VisitUnaryExpression(UnaryExpressionAst unaryExpressionAst)
         {
             var child = VisitSyntaxNode(unaryExpressionAst.Child);
             if (unaryExpressionAst.TokenKind == TokenKind.PostfixPlusPlus)
