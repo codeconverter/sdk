@@ -29,6 +29,14 @@
     {
       "Name": "Indexer",
       "Description": "Indexer property"
+    },
+    {
+      "Name": "MethodDeclaration",
+      "Description": "Declare a method"
+    },
+    {
+      "Name": "MethodDeclarationWithArguments",
+      "Description": "Declare a method with arguments"
     }
   ]
 }
