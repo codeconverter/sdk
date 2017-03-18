@@ -45,6 +45,10 @@
     {
       "Name": "ObjectCreationWithArguments",
       "Description": "Create an object with arugments"
+    },
+    {
+      "Name": "Operators",
+      "Description": "Common operators"
     }
   ]
 }

@@ -39,6 +39,7 @@
     <Compile Remove="Languages\PowerShellToCSharp\CSharp\MethodDeclarationWithArguments.cs" />
     <Compile Remove="Languages\PowerShellToCSharp\CSharp\ObjectCreation.cs" />
     <Compile Remove="Languages\PowerShellToCSharp\CSharp\ObjectCreationWithArguments.cs" />
+    <Compile Remove="Languages\PowerShellToCSharp\CSharp\Operators.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -230,6 +231,9 @@
     <Content Include="Languages\PowerShellToCSharp\CSharp\ObjectCreationWithArguments.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Languages\PowerShellToCSharp\CSharp\Operators.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Languages\PowerShellToCSharp\PowerShell\ArrayCreation.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -261,6 +265,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Languages\PowerShellToCSharp\PowerShell\ObjectCreationWithArguments.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\PowerShellToCSharp\PowerShell\Operators.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Languages\PowerShellToCSharp\tests.json">

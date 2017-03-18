@@ -31,7 +31,14 @@ namespace CodeConverter.PowerShell
                 { TokenKind.Ieq, BinaryOperator.Equal },
 				{ TokenKind.Ine, BinaryOperator.NotEqual },
 				{ TokenKind.Not, BinaryOperator.Not},
-				{ TokenKind.Ilt, BinaryOperator.LessThan }
+				{ TokenKind.Ilt, BinaryOperator.LessThan },
+				{ TokenKind.Or, BinaryOperator.Or },
+				{ TokenKind.Igt, BinaryOperator.GreaterThan },
+				{ TokenKind.Ige, BinaryOperator.GreaterThanEqualTo },
+				{ TokenKind.Ile, BinaryOperator.LessThanEqualTo },
+				{ TokenKind.Plus, BinaryOperator.Plus },
+				{ TokenKind.Minus, BinaryOperator.Minus },
+				{ TokenKind.Bor, BinaryOperator.Bor }
 			};
         }
 
