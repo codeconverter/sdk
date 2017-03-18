@@ -1,9 +1,9 @@
 ﻿function Method
 {
 	param([string[]]$strings)
-	foreach ($item in $strings)
+	foreach($item in $strings)
 	{
-		$str = $item
+		[string]$str = $item
 		continue
 	}
 }

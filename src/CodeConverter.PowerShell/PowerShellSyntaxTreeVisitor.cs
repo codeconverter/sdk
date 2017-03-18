@@ -165,7 +165,7 @@ namespace CodeConverter.PowerShell
             var condition = VisitSyntaxNode(forEachStatementAst.Condition);
             var variable = VisitSyntaxNode(forEachStatementAst.Variable);
 
-            //TODO: 
+			_currentNode = new ForEachStatement(variable as IdentifierName, condition, body);
 
             return AstVisitAction.SkipChildren;
         }
@@ -183,8 +183,15 @@ namespace CodeConverter.PowerShell
                     parameters.Add(new Parameter(parameter.StaticType?.ToString(), parameter.Name.ToString()));
                 }
             }
-           
 
+			if (functionDefinitionAst.Body.ParamBlock != null)
+			{
+				foreach (var parameter in functionDefinitionAst.Body.ParamBlock.Parameters)
+				{
+					parameters.Add(new Parameter(parameter.StaticType?.Name, parameter.Name.ToString().TrimStart('$')));
+				}
+			}
+           
             _currentNode = new MethodDeclaration(name, parameters, body, new[] { "public" }, new CodeConverter.Common.Attribute[0]);
 
             return AstVisitAction.SkipChildren;

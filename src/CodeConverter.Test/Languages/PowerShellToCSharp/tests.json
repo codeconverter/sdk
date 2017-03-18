@@ -17,6 +17,10 @@
     {
       "Name": "For",
       "Description": "For loop"
+    },
+    {
+      "Name": "Foreach",
+      "Description": "Foreach loop"
     }
   ]
 }

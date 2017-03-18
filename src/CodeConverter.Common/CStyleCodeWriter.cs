@@ -130,6 +130,9 @@ namespace CodeConverter.Common
         public override void VisitContinue(Continue node)
         {
             Append("continue");
+
+			if (TerminateStatementWithSemiColon)
+				Append(";");
         }
 
         public override void VisitElseClause(ElseClause node)
@@ -222,7 +225,7 @@ namespace CodeConverter.Common
 
         public override void VisitForEachStatement(ForEachStatement node)
         {
-            Append("foreach(");
+            Append("foreach (");
             node.Identifier.Accept(this);
             Append(" in ");
             node.Expression.Accept(this);
@@ -231,7 +234,17 @@ namespace CodeConverter.Common
             Append("{");
             Indent();
             NewLine();
-            node.Statement.Accept(this);
+
+			if (node.Statement is Block)
+			{
+				node.Statement.Accept(this);
+			}
+			else
+			{
+				var block = new Block(node.Statement);
+				block.Accept(this);
+			}
+            
             Outdent();
             Append("}");
         }
@@ -292,7 +305,14 @@ namespace CodeConverter.Common
             Append(node.Identifier);
         }
 
-        public override void VisitParenthesizedExpression(ParenthesizedExpression node)
+		public override void VisitParameter(Parameter node)
+		{
+			Append(node.Type);
+			Append(" ");
+			Append(node.Name);
+		}
+
+		public override void VisitParenthesizedExpression(ParenthesizedExpression node)
         {
             Append("(");
             node.Expression.Accept(this);
