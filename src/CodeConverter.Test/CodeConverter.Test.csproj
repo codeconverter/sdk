@@ -22,7 +22,6 @@
     <Compile Remove="Languages\CSharpToPowerShell\CSharp\PropertyAccess.cs" />
     <Compile Remove="Languages\CSharpToPowerShell\CSharp\Return.cs" />
     <Compile Remove="Languages\CSharpToPowerShell\CSharp\Snippet.cs" />
-    <Compile Remove="Languages\CSharpToPowerShell\CSharp\Snippet_50.cs" />
     <Compile Remove="Languages\CSharpToPowerShell\CSharp\Switch.cs" />
     <Compile Remove="Languages\CSharpToPowerShell\CSharp\Throw.cs" />
     <Compile Remove="Languages\CSharpToPowerShell\CSharp\TryCatchFinally.cs" />
@@ -42,12 +41,12 @@
     <Compile Remove="Languages\PowerShellToCSharp\CSharp\Operators.cs" />
     <Compile Remove="Languages\PowerShellToCSharp\CSharp\PropertyAccess.cs" />
     <Compile Remove="Languages\PowerShellToCSharp\CSharp\Return.cs" />
+    <Compile Remove="Languages\PowerShellToCSharp\CSharp\Switch.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="Languages\CSharpToPowerShell\PowerShell\ArrayCreation.ps1" />
     <None Remove="Languages\CSharpToPowerShell\PowerShell\IncompleteCodeBlock.ps1" />
-    <None Remove="Languages\CSharpToPowerShell\PowerShell\Snippet_50.ps1" />
     <None Remove="Languages\CSharpToPowerShell\PowerShell\Switch.ps1" />
     <None Remove="Languages\CSharpToPowerShell\PowerShell\Throw.ps1" />
     <None Remove="Languages\CSharpToPowerShell\PowerShell\Using.ps1" />
@@ -60,9 +59,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Languages\CSharpToPowerShell\CSharp\IncompleteCodeBlock.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Languages\CSharpToPowerShell\CSharp\Snippet_50.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Languages\CSharpToPowerShell\CSharp\Switch.cs">
@@ -188,9 +184,6 @@
     <Content Include="Languages\CSharpToPowerShell\PowerShell\Snippet.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Languages\CSharpToPowerShell\PowerShell\Snippet_50.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Languages\CSharpToPowerShell\PowerShell\Switch.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -242,6 +235,9 @@
     <Content Include="Languages\PowerShellToCSharp\CSharp\Return.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Languages\PowerShellToCSharp\CSharp\Switch.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Languages\PowerShellToCSharp\PowerShell\ArrayCreation.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -282,6 +278,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Languages\PowerShellToCSharp\PowerShell\Return.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\PowerShellToCSharp\PowerShell\Switch.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Languages\PowerShellToCSharp\tests.json">

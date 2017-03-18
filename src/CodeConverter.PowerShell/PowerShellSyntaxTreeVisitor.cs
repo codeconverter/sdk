@@ -422,7 +422,42 @@ namespace CodeConverter.PowerShell
             return AstVisitAction.SkipChildren;
         }
 
-        public override AstVisitAction VisitTryStatement(TryStatementAst tryStatementAst)
+		public override AstVisitAction VisitSwitchStatement(SwitchStatementAst switchStatementAst)
+		{
+			var condition = VisitSyntaxNode(switchStatementAst.Condition);
+
+			var sections = new List<SwitchSection>();
+
+			foreach(var clause in switchStatementAst.Clauses)
+			{
+				var cond = VisitSyntaxNode(clause.Item1);
+				var body = VisitSyntaxNode(clause.Item2);
+
+				var block = new Block(body, new Break());
+
+				var section = new SwitchSection(new[] { cond }, new[] { block });
+
+				sections.Add(section);
+			}
+
+			if (switchStatementAst.Default != null)
+			{
+				var body = VisitSyntaxNode(switchStatementAst.Default) as Block;
+
+				var statements = body.Statements.ToList();
+				statements.Add(new Break());
+
+				var section = new SwitchSection(new[] { new IdentifierName("default") }, new[] { new Block(statements) });
+				sections.Add(section);
+			}
+			
+
+			_currentNode = new SwitchStatement(condition, sections);
+
+			return AstVisitAction.SkipChildren;
+		}
+
+		public override AstVisitAction VisitTryStatement(TryStatementAst tryStatementAst)
         {
             var tryBody = VisitSyntaxNode(tryStatementAst.Body) as Block;
 

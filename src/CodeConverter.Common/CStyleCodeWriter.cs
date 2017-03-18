@@ -353,7 +353,49 @@ namespace CodeConverter.Common
             Append("\"" + node.Value + "\"");
         }
 
-        public override void VisitTemplateStringConstant(TemplateStringConstant node)
+		public override void VisitSwitchStatement(SwitchStatement node)
+		{
+			Append("switch (");
+			node.Expression.Accept(this);
+			Append(")"); NewLine();
+			Append("{"); Indent(); NewLine();
+
+			foreach (var section in node.Sections)
+			{
+				section.Accept(this);
+			}
+
+			Outdent();
+			Append("}");
+		}
+
+		public override void VisitSwitchSection(SwitchSection node)
+		{
+			foreach (var label in node.Labels)
+			{
+				var idName = label as IdentifierName;
+				if (idName?.Name.Equals("default") == true)
+				{
+					Append("default:");
+				}
+				else
+				{
+					Append("case ");
+					label.Accept(this);
+					Append(":");
+				}
+				
+				Indent();
+				foreach (var statement in node.Statements)
+				{
+					NewLine();
+					statement.Accept(this);
+				}
+				Outdent();
+			}
+		}
+
+		public override void VisitTemplateStringConstant(TemplateStringConstant node)
         {
             Append("\"" + node.Value + "\"");
         }

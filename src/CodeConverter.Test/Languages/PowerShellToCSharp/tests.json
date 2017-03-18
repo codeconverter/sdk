@@ -57,6 +57,10 @@
     {
       "Name": "Return",
       "Description": "Return statement"
+    },
+    {
+      "Name": "Switch",
+      "Description": "Switch statement"
     }
   ]
 }
