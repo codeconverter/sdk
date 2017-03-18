@@ -314,7 +314,16 @@ namespace CodeConverter.Common
             Incrementors = incrementors;
             Statement = statement;
         }
-        public Node Declaration { get; }
+
+		public ForStatement(Node initializer, Node incrementor, Node condition, Node statement)
+		{
+			Initializers = new[] { initializer };
+			Condition = condition;
+			Incrementors = new[] { incrementor };
+			Statement = statement;
+		}
+
+		public Node Declaration { get; }
         public IEnumerable<Node> Initializers { get; }
         public IEnumerable<Node> Incrementors { get; }
         public Node Condition { get; }

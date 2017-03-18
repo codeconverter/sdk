@@ -5,9 +5,31 @@ namespace CodeConverter.Common
 {
     public abstract class CStyleCodeWriter : CodeWriter
     {
+		private static Dictionary<BinaryOperator, string> _operatorMap;
+
 		protected bool TerminateStatementWithSemiColon { get; set; }
-        protected abstract Dictionary<BinaryOperator, string> OperatorMap { get; }
-        public override void VisitAssignment(Assignment node)
+		protected virtual Dictionary<BinaryOperator, string> OperatorMap => _operatorMap;
+
+		static CStyleCodeWriter()
+		{
+			_operatorMap = new Dictionary<BinaryOperator, string>
+			{
+				{ BinaryOperator.Equal, " == " },
+				{ BinaryOperator.NotEqual, " != " },
+				{ BinaryOperator.GreaterThan, " > " },
+				{ BinaryOperator.LessThan, " < " },
+				{ BinaryOperator.LessThanEqualTo, " <= " },
+				{ BinaryOperator.GreaterThanEqualTo, " >= " },
+				{ BinaryOperator.And, " && " },
+				{ BinaryOperator.Or, " || " },
+				{ BinaryOperator.Bor, " | " },
+				{ BinaryOperator.Minus, " - " },
+				{ BinaryOperator.Plus, " + " },
+				{ BinaryOperator.Not, " ! " }
+			};
+		}
+
+		public override void VisitAssignment(Assignment node)
         {
             node.Left.Accept(this);
             Append(" = ");
@@ -163,7 +185,11 @@ namespace CodeConverter.Common
                 }
             }
 
-            Append("; ");
+			// Statement will already have a semicolon on the end.
+			if (TerminateStatementWithSemiColon)
+				Append(" ");
+			else
+				Append("; ");
 
             node.Condition.Accept(this);
 
@@ -180,8 +206,16 @@ namespace CodeConverter.Common
             Indent();
             NewLine();
 
-            node.Statement.Accept(this);
-
+			if (node.Statement is Block)
+			{
+				node.Statement.Accept(this);
+			}
+			else
+			{
+				var block = new Block(node.Statement);
+				block.Accept(this);
+			}
+            
             Outdent();
             Append("}");
         }

@@ -28,8 +28,10 @@ namespace CodeConverter.PowerShell
             _operatorMap = new Dictionary<TokenKind, BinaryOperator>
             {
                 { TokenKind.And, BinaryOperator.And },
-                { TokenKind.Equals, BinaryOperator.Equal }
-            };
+                { TokenKind.Equals, BinaryOperator.Equal },
+				{ TokenKind.Not, BinaryOperator.Not},
+				{ TokenKind.Ilt, BinaryOperator.LessThan }
+			};
         }
 
         private Node _currentNode;
@@ -145,6 +147,18 @@ namespace CodeConverter.PowerShell
 			return AstVisitAction.SkipChildren;
 		}
 
+		public override AstVisitAction VisitForStatement(ForStatementAst forStatementAst)
+		{
+			var body = VisitSyntaxNode(forStatementAst.Body);
+			var condition = VisitSyntaxNode(forStatementAst.Condition);
+			var initializer = VisitSyntaxNode(forStatementAst.Initializer);
+			var iterator = VisitSyntaxNode(forStatementAst.Iterator);
+
+			_currentNode = new ForStatement(initializer, iterator, condition, body);
+
+			return AstVisitAction.SkipChildren;
+		}
+
 		public override AstVisitAction VisitForEachStatement(ForEachStatementAst forEachStatementAst)
         {
             var body = VisitSyntaxNode(forEachStatementAst.Body);
@@ -251,6 +265,8 @@ namespace CodeConverter.PowerShell
 
             return AstVisitAction.SkipChildren;
         }
+
+		
 
         public override AstVisitAction VisitExpandableStringExpression(ExpandableStringExpressionAst expandableStringExpressionAst)
         {

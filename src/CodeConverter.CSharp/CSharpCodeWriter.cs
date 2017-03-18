@@ -9,8 +9,6 @@ namespace CodeConverter.CSharp
     {
         public override Language Language => Language.CSharp;
 
-        protected override Dictionary<BinaryOperator, string> OperatorMap => throw new NotImplementedException();
-
 		public CSharpCodeWriter()
 		{
 			TerminateStatementWithSemiColon = true;

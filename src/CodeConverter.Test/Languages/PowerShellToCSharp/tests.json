@@ -13,6 +13,10 @@
     {
       "Name": "Cast",
       "Description": "Cast operator"
+    },
+    {
+      "Name": "For",
+      "Description": "For loop"
     }
   ]
 }
