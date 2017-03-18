@@ -53,6 +53,10 @@
     {
       "Name": "PropertyAccess",
       "Description": "Access the property of a variable"
+    },
+    {
+      "Name": "Return",
+      "Description": "Return statement"
     }
   ]
 }
