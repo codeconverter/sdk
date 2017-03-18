@@ -106,8 +106,15 @@ namespace CodeConverter.Common
         {
             Expression = expression;
         }
-        
-        public Node Expression { get; }
+
+		public Argument(string name, Node expression)
+		{
+			Name = name;
+			Expression = expression;
+		}
+
+		public string Name { get; }
+        public Node Expression { get; set; }
 
         public override void Accept(NodeVisitor visitor)
         {

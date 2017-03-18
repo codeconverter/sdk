@@ -148,6 +148,10 @@ namespace CodeConverter.Common
                 Indent();
                 NewLine();
             }
+			else
+			{
+				Append(" ");
+			}
 
             node.Body.Accept(this);
 

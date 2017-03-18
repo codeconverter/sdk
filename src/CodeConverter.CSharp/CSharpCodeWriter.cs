@@ -32,6 +32,17 @@ namespace CodeConverter.CSharp
 			Append(" }");
 		}
 
+		public override void VisitObjectCreation(ObjectCreation node)
+		{
+			Append("new ");
+			Append(node.Type);
+			Append("(");
+
+			node.Arguments?.Accept(this);
+
+			Append(")");
+		}
+
 		public override void VisitForEachStatement(ForEachStatement node)
 		{
 			Append("foreach (var ");

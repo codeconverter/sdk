@@ -28,7 +28,8 @@ namespace CodeConverter.PowerShell
             _operatorMap = new Dictionary<TokenKind, BinaryOperator>
             {
                 { TokenKind.And, BinaryOperator.And },
-                { TokenKind.Equals, BinaryOperator.Equal },
+                { TokenKind.Ieq, BinaryOperator.Equal },
+				{ TokenKind.Ine, BinaryOperator.NotEqual },
 				{ TokenKind.Not, BinaryOperator.Not},
 				{ TokenKind.Ilt, BinaryOperator.LessThan }
 			};
@@ -125,7 +126,67 @@ namespace CodeConverter.PowerShell
             return AstVisitAction.SkipChildren;
         }
 
-        public override AstVisitAction VisitConstantExpression(ConstantExpressionAst constantExpressionAst)
+		public override AstVisitAction VisitCommand(CommandAst commandAst)
+		{
+			var name = commandAst.GetCommandName();
+			var elements = commandAst.CommandElements.Skip(1).ToArray();
+			var arguments = new List<Argument>();
+
+			for(var i = 0; i < elements.Length; i++)
+			{
+				var node = VisitSyntaxNode(elements[i]);
+				var argument = node as Argument;
+				if (argument != null && i < elements.Length - 1 && argument.Expression == null)
+				{
+					node = VisitSyntaxNode(elements[i+1]);
+					argument.Expression = node;
+					i++;
+				}
+				else if (argument == null)
+				{
+					argument = new Argument(node);
+				}
+				arguments.Add(argument);
+			}
+
+			_currentNode = ConvertCommand(new Invocation(new IdentifierName(name), new ArgumentList(arguments)));
+
+			return AstVisitAction.SkipChildren;
+		}
+
+		public Node ConvertCommand(Invocation node)
+		{
+			var name = node.Expression as IdentifierName;
+			if (name == null)
+				return node;
+
+			if (name.Name.Equals("New-Object", StringComparison.OrdinalIgnoreCase))
+			{
+				var typeNameArg = node.Arguments.Arguments.Cast<Argument>().FirstOrDefault(m => m.Name.Equals("TypeName", StringComparison.OrdinalIgnoreCase));
+				var argumentListArgs = node.Arguments.Arguments.Cast<Argument>().FirstOrDefault(m => m.Name.Equals("ArgumentList", StringComparison.OrdinalIgnoreCase));
+
+				var typeName = typeNameArg?.Expression as StringConstant;
+				if (typeName == null)
+					return node;
+
+				return new ObjectCreation(typeName.Value, argumentListArgs?.Expression as ArgumentList);
+			}
+
+			return node;
+		}
+
+		public override AstVisitAction VisitCommandParameter(CommandParameterAst commandParameterAst)
+		{
+			Node expression = null;
+			if (commandParameterAst.Argument != null)
+				expression = VisitSyntaxNode(commandParameterAst.Argument);
+
+			_currentNode = new Argument(commandParameterAst.ParameterName, expression);
+
+			return AstVisitAction.SkipChildren;
+		}
+
+		public override AstVisitAction VisitConstantExpression(ConstantExpressionAst constantExpressionAst)
         {
             _currentNode = new Literal(constantExpressionAst.Value.ToString());
             return AstVisitAction.SkipChildren;
@@ -209,10 +270,10 @@ namespace CodeConverter.PowerShell
             var previousIf = ifStatement;
 
             // Else ifs
-            foreach (var clause in ifStmtAst.Clauses)
+            foreach (var clause in ifStmtAst.Clauses.Skip(1))
             {
-                condition_maybe = VisitSyntaxNode(firstCondition.Item1);
-                body = VisitSyntaxNode(firstCondition.Item2);
+                condition_maybe = VisitSyntaxNode(clause.Item1);
+                body = VisitSyntaxNode(clause.Item2);
                 var nextCondition = new IfStatement(condition_maybe, body);
                 previousIf.ElseClause = new ElseClause(nextCondition);
                 previousIf = nextCondition;

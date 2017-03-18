@@ -107,7 +107,30 @@ namespace CodeConverter.PowerShell
             node.ElseClause?.Accept(this);
         }
 
-        public override void VisitLiteral(Literal node)
+		public override void VisitElseClause(ElseClause node)
+		{
+			NewLine();
+			Append("else");
+
+			var isIf = node.Body is IfStatement;
+			if (!isIf)
+			{
+				NewLine();
+				Append("{");
+				Indent();
+				NewLine();
+			}
+
+			node.Body.Accept(this);
+
+			if (!isIf)
+			{
+				Outdent();
+				Append("}");
+			}
+		}
+
+		public override void VisitLiteral(Literal node)
         {
             if (node.Token == "true" || node.Token == "false")
                 Append("$");

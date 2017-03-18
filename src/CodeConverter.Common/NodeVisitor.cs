@@ -171,7 +171,7 @@
 
         public virtual void VisitObjectCreation(ObjectCreation node)
         {
-            node.Arguments.Accept(this);
+            node.Arguments?.Accept(this);
         }
 
         public virtual void VisitParameter(Parameter node)
