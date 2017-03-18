@@ -135,7 +135,24 @@ namespace CodeConverter.Common
 				Append(";");
         }
 
-        public override void VisitElseClause(ElseClause node)
+		public override void VisitBracketedArgumentList(BracketedArgumentList node)
+		{
+			Append("[");
+
+			foreach (var argument in node.Arguments)
+			{
+				argument.Accept(this);
+
+				Append(",");
+			}
+
+			//Remove trailing comma
+			Builder.Remove(Builder.Length - 1, 1);
+
+			Append("]");
+		}
+
+		public override void VisitElseClause(ElseClause node)
         {
             NewLine();
             Append("else");

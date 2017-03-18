@@ -34,6 +34,7 @@
     <Compile Remove="Languages\PowerShellToCSharp\CSharp\For.cs" />
     <Compile Remove="Languages\PowerShellToCSharp\CSharp\Foreach.cs" />
     <Compile Remove="Languages\PowerShellToCSharp\CSharp\If.cs" />
+    <Compile Remove="Languages\PowerShellToCSharp\CSharp\Indexer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -210,6 +211,9 @@
     <Content Include="Languages\PowerShellToCSharp\CSharp\If.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Languages\PowerShellToCSharp\CSharp\Indexer.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Languages\PowerShellToCSharp\PowerShell\ArrayCreation.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -226,6 +230,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Languages\PowerShellToCSharp\PowerShell\If.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\PowerShellToCSharp\PowerShell\Indexer.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Languages\PowerShellToCSharp\tests.json">

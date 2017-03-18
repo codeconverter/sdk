@@ -297,7 +297,17 @@ namespace CodeConverter.PowerShell
             return AstVisitAction.SkipChildren;
         }
 
-        public override AstVisitAction VisitInvokeMemberExpression(InvokeMemberExpressionAst methodCallAst)
+		public override AstVisitAction VisitIndexExpression(IndexExpressionAst indexExpressionAst)
+		{
+			var target = VisitSyntaxNode(indexExpressionAst.Target);
+			var index = VisitSyntaxNode(indexExpressionAst.Index);
+
+			_currentNode = new ElementAccess(target, new BracketedArgumentList(new ArgumentList(index)));
+
+			return AstVisitAction.SkipChildren;
+		}
+
+		public override AstVisitAction VisitInvokeMemberExpression(InvokeMemberExpressionAst methodCallAst)
         {
             var arguments = new List<Argument>();
             foreach(var argument in methodCallAst.Arguments)

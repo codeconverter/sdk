@@ -44,23 +44,6 @@ namespace CodeConverter.PowerShell
             Append(")");
         }
 
-        public override void VisitBracketedArgumentList(BracketedArgumentList node)
-        {
-            Append("[");
-
-            foreach (var argument in node.Arguments)
-            {
-                argument.Accept(this);
-
-                Append(",");
-            }
-
-            //Remove trailing comma
-            Builder.Remove(Builder.Length - 1, 1);
-
-            Append("]");
-        }
-
         public override void VisitBreak(Break node)
         {
             if (_inSwitch) return;

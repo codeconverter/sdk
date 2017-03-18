@@ -25,6 +25,10 @@
     {
       "Name": "If",
       "Description": "If, Else If, Else"
+    },
+    {
+      "Name": "Indexer",
+      "Description": "Indexer property"
     }
   ]
 }
