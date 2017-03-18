@@ -1,5 +1,5 @@
 ﻿void Method()
 {
 	int variable = 1;
-	string variable2 = "myStr";
+	string variable2 = "myString";
 }

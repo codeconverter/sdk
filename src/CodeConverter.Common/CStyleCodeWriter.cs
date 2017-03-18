@@ -372,7 +372,7 @@ namespace CodeConverter.Common
 			{
 				Append(" = ");
 				node.Initializer.Accept(this);
-
+				
 			}
 
 			if (TerminateStatementWithSemiColon)

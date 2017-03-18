@@ -35,7 +35,6 @@ namespace CodeConverter.Test
             var ast = testCase.SyntaxTreeVisitor.Visit(source);
             var actual = testCase.CodeWriter.Write(ast).Trim();
 
-            Console.WriteLine(actual);
             Assert.Equal(target, actual);
 
             mdBuilder.AppendLine($"## {testCase.Description}");
@@ -224,7 +223,10 @@ namespace CodeConverter.Test
 
         public override string ToString()
         {
-            return $"{Name}, {SyntaxTreeVisitor.GetType().Name} -> {CodeWriter.GetType().Name}";
+			var sourceLanguage = Enum.GetName(typeof(Language), SyntaxTreeVisitor.Language);
+			var targetLanguage = Enum.GetName(typeof(Language), CodeWriter.Language);
+
+			return $"{sourceLanguage} -> {targetLanguage}: {Name}";
         }
     }
 }

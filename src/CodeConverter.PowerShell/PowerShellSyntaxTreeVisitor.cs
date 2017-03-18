@@ -135,7 +135,17 @@ namespace CodeConverter.PowerShell
             return AstVisitAction.SkipChildren;
         }
 
-        public override AstVisitAction VisitForEachStatement(ForEachStatementAst forEachStatementAst)
+		public override AstVisitAction VisitConvertExpression(ConvertExpressionAst convertExpressionAst)
+		{
+			var expression = VisitSyntaxNode(convertExpressionAst.Child);
+			var type = convertExpressionAst.Type.TypeName.Name;
+
+			_currentNode = new Cast(type, expression);
+
+			return AstVisitAction.SkipChildren;
+		}
+
+		public override AstVisitAction VisitForEachStatement(ForEachStatementAst forEachStatementAst)
         {
             var body = VisitSyntaxNode(forEachStatementAst.Body);
             var condition = VisitSyntaxNode(forEachStatementAst.Condition);
@@ -255,7 +265,21 @@ namespace CodeConverter.PowerShell
             return AstVisitAction.SkipChildren;
         }
 
-        public override AstVisitAction VisitStatementBlock(StatementBlockAst statementBlockAst)
+		public override AstVisitAction VisitScriptBlock(ScriptBlockAst scriptBlockAst)
+		{
+			var statements = new List<Node>();
+
+			foreach(var statement in scriptBlockAst.EndBlock.Statements)
+			{
+				statements.Add(VisitSyntaxNode(statement));
+			}
+
+			_currentNode = new Block(statements);
+
+			return AstVisitAction.SkipChildren;
+		}
+
+		public override AstVisitAction VisitStatementBlock(StatementBlockAst statementBlockAst)
         {
             var statements = new List<Node>();
             foreach(var statement in statementBlockAst.Statements)

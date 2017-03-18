@@ -9,6 +9,10 @@
     {
       "Name": "AssignVariable",
       "Description": "Assign a constant to a variable"
+    },
+    {
+      "Name": "Cast",
+      "Description": "Cast operator"
     }
   ]
 }

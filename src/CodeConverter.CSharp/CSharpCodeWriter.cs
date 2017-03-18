@@ -57,7 +57,6 @@ namespace CodeConverter.CSharp
             NewLine();
 
             node.Body.Accept(this);
-            NewLine();
 
             Outdent();
             Append("}");
