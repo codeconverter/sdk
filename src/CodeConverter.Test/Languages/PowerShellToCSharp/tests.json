@@ -49,6 +49,10 @@
     {
       "Name": "Operators",
       "Description": "Common operators"
+    },
+    {
+      "Name": "PropertyAccess",
+      "Description": "Access the property of a variable"
     }
   ]
 }

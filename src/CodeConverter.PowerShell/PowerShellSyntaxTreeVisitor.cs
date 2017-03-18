@@ -350,7 +350,21 @@ namespace CodeConverter.PowerShell
             return AstVisitAction.SkipChildren;
         }
 
-        public override AstVisitAction VisitStringConstantExpression(StringConstantExpressionAst stringConstantExpressionAst)
+		public override AstVisitAction VisitMemberExpression(MemberExpressionAst memberExpressionAst)
+		{
+			var expression = VisitSyntaxNode(memberExpressionAst.Expression);
+			var member = VisitSyntaxNode(memberExpressionAst.Member);
+
+			if (member is StringConstant)
+			{
+				var str = member as StringConstant;
+				_currentNode = new MemberAccess(expression, str.Value);
+			}
+			
+			return AstVisitAction.SkipChildren; 
+		}
+
+		public override AstVisitAction VisitStringConstantExpression(StringConstantExpressionAst stringConstantExpressionAst)
         {
             _currentNode = new StringConstant(stringConstantExpressionAst.Value);
 
