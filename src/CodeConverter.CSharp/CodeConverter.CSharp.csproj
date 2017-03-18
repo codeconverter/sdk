@@ -13,8 +13,8 @@
     <RepositoryUrl>https://github.com/codeconverter/sdk</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>code conversion csharp</PackageTags>
-    <PackageReleaseNotes>Adding throw</PackageReleaseNotes>
-    <Version>1.0.9-alpha</Version>
+    <PackageReleaseNotes>using AstVisitor instead of AstVisitor2.</PackageReleaseNotes>
+    <Version>1.0.12-alpha</Version>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\CodeConverter.Common\CodeConverter.Common.csproj" />

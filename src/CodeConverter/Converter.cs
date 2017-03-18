@@ -19,12 +19,14 @@ namespace CodeConverter
         {
             _parsers = new List<ISyntaxTreeVisitor>
             {
-                new CSharpSyntaxTreeVisitor()
+                new CSharpSyntaxTreeVisitor(),
+				new PowerShellSyntaxTreeVisitor()
             };
 
             _codeWriters = new List<CodeWriter>
             {
-                new PowerShellCodeWriter()
+                new PowerShellCodeWriter(),
+				new CSharpCodeWriter()
             };
         }
 

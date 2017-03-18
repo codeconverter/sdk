@@ -19,7 +19,7 @@ namespace CodeConverter.PowerShell
         }
     }
 
-    internal class PowerShellAstVisitor : AstVisitor2
+    internal class PowerShellAstVisitor : AstVisitor
     {
         private static Dictionary<TokenKind, BinaryOperator> _operatorMap;
 
