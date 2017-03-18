@@ -14,4 +14,4 @@ Install-Package codeconverter -pre
 
 ## Conversion Tests
 
-[Language Tests](https://codeconverter.github.io/sdk/language-tests)
+[Language Tests](https://codeconverter.github.io/sdk/docs/language-tests)
