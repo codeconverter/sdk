@@ -11,6 +11,7 @@ Install-Package codeconverter -pre
 ## Current conversion
 
 - C# to PowerShell
+- PowerShell to C#
 
 ## Conversion Tests
 
