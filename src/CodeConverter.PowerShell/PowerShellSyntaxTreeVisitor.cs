@@ -530,7 +530,13 @@ namespace CodeConverter.PowerShell
             var body = VisitSyntaxNode(whileStatementAst.Body);
             var condition = VisitSyntaxNode(whileStatementAst.Condition);
 
-            _currentNode = new While(condition, body);
+			var block = body as Block;
+			if (block == null)
+			{
+				block = new Block(body);
+			}
+
+            _currentNode = new While(condition, block);
 
             return AstVisitAction.SkipChildren;
         }

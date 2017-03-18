@@ -536,7 +536,11 @@ namespace CodeConverter.CSharp
             var condition = VisitSyntaxNode(node.Condition);
             var statement = VisitSyntaxNode(node.Statement);
 
-            _currentNode = new While(condition, statement);
+			var block = statement as Block;
+			if (block == null)
+				block = new Block(statement);
+
+            _currentNode = new While(condition, block);
         }
 
         public override void VisitIncompleteMember(IncompleteMemberSyntax node)

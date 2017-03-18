@@ -69,6 +69,10 @@
     {
       "Name": "TryCatchFinally",
       "Description": "Try, catch, finally"
+    },
+    {
+      "Name": "While",
+      "Description": "While loop with break"
     }
   ]
 }

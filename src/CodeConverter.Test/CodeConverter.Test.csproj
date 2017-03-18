@@ -44,6 +44,7 @@
     <Compile Remove="Languages\PowerShellToCSharp\CSharp\Switch.cs" />
     <Compile Remove="Languages\PowerShellToCSharp\CSharp\Throw.cs" />
     <Compile Remove="Languages\PowerShellToCSharp\CSharp\TryCatchFinally.cs" />
+    <Compile Remove="Languages\PowerShellToCSharp\CSharp\While.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -246,6 +247,9 @@
     <Content Include="Languages\PowerShellToCSharp\CSharp\TryCatchFinally.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Languages\PowerShellToCSharp\CSharp\While.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Languages\PowerShellToCSharp\PowerShell\ArrayCreation.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -295,6 +299,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Languages\PowerShellToCSharp\PowerShell\TryCatchFinally.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\PowerShellToCSharp\PowerShell\While.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Languages\PowerShellToCSharp\tests.json">

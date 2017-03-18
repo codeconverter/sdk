@@ -452,7 +452,7 @@ namespace CodeConverter.Common
 
         public override void VisitWhile(While node)
         {
-            Append("while(");
+            Append("while (");
             node.Condition.Accept(this);
             Append(")");
             NewLine();

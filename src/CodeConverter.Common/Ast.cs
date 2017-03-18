@@ -780,14 +780,14 @@ namespace CodeConverter.Common
 
     public class While : Node
     {
-        public While(Node condition, Node statement)
+        public While(Node condition, Block statement)
         {
             Condition = condition;
             Statement = statement;
         }
 
         public Node Condition { get; }
-        public Node Statement { get; }
+        public Block Statement { get; }
 
         public override void Accept(NodeVisitor visitor)
         {
