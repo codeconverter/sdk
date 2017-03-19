@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace CodeConverter.Common
 {
@@ -8,11 +7,29 @@ namespace CodeConverter.Common
     /// </summary>
     public abstract class Node
     {
+		public Node Parent { get; set; }
         public static CodeWriter DefaultCodeWriter { get; set; }
         public CodeWriter CodeWriter { get; set; }
         public Language SourceLanguage { get; }
         public string OriginalSource { get; set; }
         public abstract void Accept(NodeVisitor visitor);
+
+		protected void SetParent(Node node)
+		{
+			if (node != null)
+				node.Parent = this;
+		}
+
+		protected void SetParent(IEnumerable<Node> nodes)
+		{
+			if (nodes != null)
+			{
+				foreach(var node in nodes)
+				{
+					node.Parent = this;
+				}
+			}
+		}
 
         public override string ToString()
         {
@@ -44,10 +61,11 @@ namespace CodeConverter.Common
 
     public class ArrayCreation : Node
     {
-        public ArrayCreation(IEnumerable<Node> initializer, string type)
+        public ArrayCreation(IEnumerable<Node> initializers, string type)
         {
-            Initializer = initializer;
+            Initializer = initializers;
             Type = type;
+			SetParent(Initializer);
         }
 
         public IEnumerable<Node> Initializer { get; }
@@ -68,6 +86,8 @@ namespace CodeConverter.Common
             Left = left;
             Operator = @operator;
             Right = right;
+			SetParent(Left);
+			SetParent(Right);
         }
 
         public Node Left { get; }
@@ -89,6 +109,8 @@ namespace CodeConverter.Common
         {
             Left = left;
             Right = right;
+			SetParent(Left);
+			SetParent(Right);
         }
 
         public Node Left { get; }
@@ -105,12 +127,14 @@ namespace CodeConverter.Common
         public Argument(Node expression)
         {
             Expression = expression;
+			SetParent(Expression);
         }
 
 		public Argument(string name, Node expression)
 		{
 			Name = name;
 			Expression = expression;
+			SetParent(Expression);
 		}
 
 		public string Name { get; }
@@ -127,6 +151,7 @@ namespace CodeConverter.Common
         public ArgumentList(params Node[] arguments)
         {
             Arguments = arguments;
+			SetParent(Arguments);
         }
 
         public ArgumentList(IEnumerable<Node> arguments)
@@ -148,6 +173,7 @@ namespace CodeConverter.Common
         {
             ArgumentList = argumentList;
             Name = name;
+			SetParent(ArgumentList);
         }
 
         public ArgumentList ArgumentList { get; set; }
@@ -164,6 +190,7 @@ namespace CodeConverter.Common
         public Block(params Node[] statements)
         {
             Statements = statements;
+			SetParent(Statements);
         }
 
         public Block(IEnumerable<Node> statements)
@@ -205,7 +232,8 @@ namespace CodeConverter.Common
         {
             Type = type;
             Expression = expression;
-        }
+			SetParent(Expression);
+		}
         public string Type { get; }
         public Node Expression { get; }
 
@@ -221,7 +249,9 @@ namespace CodeConverter.Common
         {
             Declaration = declaration;
             Block = block;
-        }
+			SetParent(Declaration);
+			SetParent(Block);
+		}
 
         public Node Declaration { get; }
         public Block Block { get; }
@@ -258,13 +288,15 @@ namespace CodeConverter.Common
         {
             Name = name;
             Members = members;
-        }
+			SetParent(Members);
+		}
 
         public ClassDeclaration(string name, IEnumerable<Node> members)
         {
             Name = name;
             Members = members;
-        }
+			SetParent(members);
+		}
 
         public override void Accept(NodeVisitor visitor)
         {
@@ -286,7 +318,9 @@ namespace CodeConverter.Common
         {
             Expression = expression;
             ArgumentList = argumentList;
-        }
+			SetParent(Expression);
+			SetParent(ArgumentList);
+		}
         public Node Expression { get; }
         public ArgumentList ArgumentList { get; }
 
@@ -301,7 +335,8 @@ namespace CodeConverter.Common
         public ElseClause(Node body)
         {
             Body = body;
-        }
+			SetParent(Body);
+		}
 
         public Node Body { get; }
 
@@ -320,7 +355,12 @@ namespace CodeConverter.Common
             Condition = condition;
             Incrementors = incrementors;
             Statement = statement;
-        }
+			SetParent(Declaration);
+			SetParent(Initializers);
+			SetParent(Incrementors);
+			SetParent(Condition);
+			SetParent(Statement);
+		}
 
 		public ForStatement(Node initializer, Node incrementor, Node condition, Node statement)
 		{
@@ -328,6 +368,12 @@ namespace CodeConverter.Common
 			Condition = condition;
 			Incrementors = new[] { incrementor };
 			Statement = statement;
+
+			SetParent(Declaration);
+			SetParent(Initializers);
+			SetParent(Incrementors);
+			SetParent(Condition);
+			SetParent(Statement);
 		}
 
 		public Node Declaration { get; }
@@ -347,7 +393,8 @@ namespace CodeConverter.Common
         public Finally(Node body)
         {
             Body = body;
-        }
+			SetParent(Body);
+		}
 
         public Node Body { get; }
 
@@ -364,7 +411,11 @@ namespace CodeConverter.Common
             Identifier = identifier;
             Expression = expression;
             Statement = statement;
-        }
+
+			SetParent(Identifier);
+			SetParent(Expression);
+			SetParent(Statement);
+		}
 
         public IdentifierName Identifier { get; }
         public Node Expression { get; }
@@ -397,14 +448,21 @@ namespace CodeConverter.Common
         {
             Condition = condition;
             Body = body;
-        }
+
+			SetParent(Condition);
+			SetParent(Body);
+		}
 
         public IfStatement(Node condition, Node body, ElseClause elseClause)
         {
             Condition = condition;
             Body = body;
             ElseClause = elseClause;
-        }
+
+			SetParent(Condition);
+			SetParent(Body);
+			SetParent(ElseClause);
+		}
 
         public Node Condition { get; }
         public Node Body { get; }
@@ -436,7 +494,10 @@ namespace CodeConverter.Common
         {
             Expression = expression;
             Arguments = arguments;
-        }
+
+			SetParent(Expression);
+			SetParent(Arguments);
+		}
 
         public Node Expression { get; }
         public ArgumentList Arguments { get; }
@@ -453,7 +514,9 @@ namespace CodeConverter.Common
         {
             Expression = expression;
             Identifier = identifier;
-        }
+
+			SetParent(Expression);
+		}
 
         public Node Expression { get; }
         public string Identifier { get; }
@@ -473,7 +536,11 @@ namespace CodeConverter.Common
             Body = body;
             Modifiers = modifiers;
             Attributes = attributes;
-        }
+
+			SetParent(Parameters);
+			SetParent(Body);
+			SetParent(Attributes);
+		}
 
         public string Name { get; }
         public IEnumerable<Parameter> Parameters { get; set; }
@@ -493,7 +560,9 @@ namespace CodeConverter.Common
         {
             Name = name;
             Members = members;
-        }
+
+			SetParent(Members);
+		}
 
         public Namespace(string name, IEnumerable<Node> members)
         {
@@ -516,7 +585,9 @@ namespace CodeConverter.Common
         {
             Type = type;
             Arguments = arguments;
-        }
+
+			SetParent(Arguments);
+		}
 
         public string Type { get; }
         public ArgumentList Arguments { get; }
@@ -558,7 +629,9 @@ namespace CodeConverter.Common
         public ParenthesizedExpression(Node expression)
         {
             Expression = expression;
-        }
+
+			SetParent(Expression);
+		}
 
         public Node Expression { get; }
 
@@ -574,7 +647,9 @@ namespace CodeConverter.Common
         {
             Operand = operand;
             Operator = @operator;
-        }
+
+			SetParent(Operand);
+		}
         public Node Operand { get; }
         public string Operator { get; }
 
@@ -590,7 +665,9 @@ namespace CodeConverter.Common
         {
             Operand = operand;
             Operator = @operator;
-        }
+
+			SetParent(Operand);
+		}
         public Node Operand { get; }
         public string Operator { get; }
 
@@ -633,7 +710,9 @@ namespace CodeConverter.Common
         public Throw(Node statement)
         {
             Statement = statement;
-        }
+
+			SetParent(Statement);
+		}
 
         public Node Statement { get; set; }
 
@@ -649,13 +728,20 @@ namespace CodeConverter.Common
 		{
 			Block = block;
 			Catches = catches;
+
+			SetParent(Block);
+			SetParent(Catches);
 		}
 		public Try(Block block, IEnumerable<Catch> catches, Finally @finally)
         {
             Block = block;
             Catches = catches;
             Finally = @finally;
-        }
+
+			SetParent(Block);
+			SetParent(Catches);
+			SetParent(Finally);
+		}
         public Block Block { get; }
         public IEnumerable<Catch> Catches { get; }
         public Finally Finally { get; }
@@ -671,7 +757,9 @@ namespace CodeConverter.Common
         public ReturnStatement(Node expression)
         {
             Expression = expression;
-        }
+
+			SetParent(Expression);
+		}
 
         public Node Expression { get; }
         public override void Accept(NodeVisitor visitor)
@@ -686,7 +774,10 @@ namespace CodeConverter.Common
         {
             Expression = expression;
             Sections = sections;
-        }
+
+			SetParent(Expression);
+			SetParent(Sections);
+		}
 
         public Node Expression { get; set; }
         public IEnumerable<SwitchSection> Sections { get; set; }
@@ -703,7 +794,10 @@ namespace CodeConverter.Common
         {
             Labels = labels;
             Statements = statements;
-        }
+
+			SetParent(Labels);
+			SetParent(Statements);
+		}
 
         public IEnumerable<Node> Labels { get; set; }
         public IEnumerable<Node> Statements { get; set; }
@@ -735,7 +829,10 @@ namespace CodeConverter.Common
         {
             Declaration = declaration;
             Expression = expression;
-        }
+
+			SetParent(Declaration);
+			SetParent(Expression);
+		}
         public Node Declaration { get; }
         public Node Expression { get; }
         public override void Accept(NodeVisitor visitor)
@@ -750,13 +847,17 @@ namespace CodeConverter.Common
         {
             Type = type;
             Variables = variables;
-        }
+
+			SetParent(Variables);
+		}
 
         public VariableDeclaration(string type, IEnumerable<VariableDeclarator> variables)
         {
             Type = type;
             Variables = variables;
-        }
+
+			SetParent(Variables);
+		}
         public string Type { get; }
         public IEnumerable<VariableDeclarator> Variables { get; }
 
@@ -772,7 +873,9 @@ namespace CodeConverter.Common
         {
             Name = name;
             Initializer = initializer;
-        }
+
+			SetParent(Initializer);
+		}
 
         public string Name { get; }
         public Node Initializer { get; }
@@ -789,7 +892,10 @@ namespace CodeConverter.Common
         {
             Condition = condition;
             Statement = statement;
-        }
+
+			SetParent(Condition);
+			SetParent(Statement);
+		}
 
         public Node Condition { get; }
         public Block Statement { get; }
