@@ -284,7 +284,7 @@ namespace CodeConverter.Common
             node.Body.Accept(this);
 
             Outdent();
-            Append("}");
+			Append("}");
 
             node.ElseClause?.Accept(this);
         }

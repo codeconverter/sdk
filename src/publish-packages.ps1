@@ -1,5 +1,5 @@
-$version = "1.0.12-alpha"
-$releaseNotes = "using AstVisitor instead of AstVisitor2."
+$version = "1.0.14-alpha"
+$releaseNotes = "Bug fixes"
 
 $projects = @('CodeConverter.Common', 'CodeConverter.CSharp', 'CodeConverter.PowerShell', 'CodeConverter')
 

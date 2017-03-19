@@ -47,7 +47,7 @@ namespace CodeConverter.PowerShell
 
         public Node VisitSyntaxNode(Ast node)
         {
-            node.Visit(this);
+            node?.Visit(this);
             return _currentNode;
         }
 		public override AstVisitAction VisitArrayLiteral(ArrayLiteralAst arrayLiteralAst)
@@ -280,20 +280,23 @@ namespace CodeConverter.PowerShell
         public override AstVisitAction VisitIfStatement(IfStatementAst ifStmtAst)
         {
             var firstCondition = ifStmtAst.Clauses.First();
-            var condition_maybe = VisitSyntaxNode(firstCondition.Item1);
+            var condition = VisitSyntaxNode(firstCondition.Item1);
             var body = VisitSyntaxNode(firstCondition.Item2);
 
-            // If
-            var ifStatement = new IfStatement(condition_maybe, body);
+			body = EnsureBlock(body);
+
+			// If
+			var ifStatement = new IfStatement(condition, body);
 
             var previousIf = ifStatement;
 
             // Else ifs
             foreach (var clause in ifStmtAst.Clauses.Skip(1))
             {
-                condition_maybe = VisitSyntaxNode(clause.Item1);
+				condition = VisitSyntaxNode(clause.Item1);
                 body = VisitSyntaxNode(clause.Item2);
-                var nextCondition = new IfStatement(condition_maybe, body);
+				body = EnsureBlock(body);
+				var nextCondition = new IfStatement(condition, body);
                 previousIf.ElseClause = new ElseClause(nextCondition);
                 previousIf = nextCondition;
             }
@@ -329,12 +332,17 @@ namespace CodeConverter.PowerShell
 		public override AstVisitAction VisitInvokeMemberExpression(InvokeMemberExpressionAst methodCallAst)
         {
             var arguments = new List<Argument>();
-            foreach(var argument in methodCallAst.Arguments)
-            {
-                var arg = VisitSyntaxNode(argument);
-                var ar = new Argument(arg);
-                arguments.Add(ar);
-            }
+
+			if (methodCallAst.Arguments != null)
+			{
+				foreach (var argument in methodCallAst.Arguments)
+				{
+					var arg = VisitSyntaxNode(argument);
+					var ar = new Argument(arg);
+					arguments.Add(ar);
+				}
+			}
+           
 
             var expression = VisitSyntaxNode(methodCallAst.Expression);
 
@@ -479,16 +487,27 @@ namespace CodeConverter.PowerShell
                 catches.Add(catchNode);
             }
 
-            var fin = VisitSyntaxNode(tryStatementAst.Finally);
-			var finBody = fin as Block;
-			if (finBody == null)
+			if (tryStatementAst.Finally != null)
 			{
-				finBody = new Block(fin);
+				var fin = VisitSyntaxNode(tryStatementAst.Finally);
+				var finBody = fin as Block;
+				if (finBody == null)
+				{
+					finBody = new Block(fin);
+				}
+
+				var fina = new Finally(finBody);
+
+				_currentNode = new Try(body, catches, fina);
+			}
+            else
+			{
+				_currentNode = new Try(body, catches);
 			}
 
-			var fina = new Finally(finBody);
+			
 
-            _currentNode = new Try(body, catches, fina);
+            
 
             return AstVisitAction.SkipChildren;
         }
@@ -554,6 +573,16 @@ namespace CodeConverter.PowerShell
             _currentNode = new IdentifierName(variableName);
             return AstVisitAction.SkipChildren;
         }
-    }
+
+		private Node EnsureBlock(Node node)
+		{
+			var block = node as Block;
+			if (block == null)
+			{
+				return new Block(node);
+			}
+			return node;
+		}
+	}
 
 }

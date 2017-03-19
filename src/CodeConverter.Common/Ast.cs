@@ -645,7 +645,12 @@ namespace CodeConverter.Common
     
     public class Try : Node
     {
-        public Try(Block block, IEnumerable<Catch> catches, Finally @finally)
+		public Try(Block block, IEnumerable<Catch> catches)
+		{
+			Block = block;
+			Catches = catches;
+		}
+		public Try(Block block, IEnumerable<Catch> catches, Finally @finally)
         {
             Block = block;
             Catches = catches;
