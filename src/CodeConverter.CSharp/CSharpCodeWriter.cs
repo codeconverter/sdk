@@ -12,6 +12,7 @@ namespace CodeConverter.CSharp
 		public CSharpCodeWriter()
 		{
 			TerminateStatementWithSemiColon = true;
+			IntentVisitor = new CSharpIntentVisitor();
 		}
 
 		public override void VisitArrayCreation(ArrayCreation node)
@@ -30,6 +31,18 @@ namespace CodeConverter.CSharp
 			Builder.Remove(Builder.Length - 2, 2);
 
 			Append(" };");
+		}
+
+		public override void VisitInvocation(Invocation node)
+		{
+			if (IntentVisitor != null && node.Intent != null)
+			{
+				var alternateNode = node.Intent.Accept(IntentVisitor);
+				alternateNode.Accept(this);
+				return;
+			}
+
+			base.VisitInvocation(node);
 		}
 
 		public override void VisitObjectCreation(ObjectCreation node)

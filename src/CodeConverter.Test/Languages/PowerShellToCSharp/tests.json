@@ -59,6 +59,10 @@
       "Description": "Return statement"
     },
     {
+      "Name": "StaticMethod",
+      "Description": "Static method"
+    },
+    {
       "Name": "Switch",
       "Description": "Switch statement"
     },
@@ -73,6 +77,10 @@
     {
       "Name": "While",
       "Description": "While loop with break"
+    },
+    {
+      "Name": "WriteFile",
+      "Description": "Out-File to File.WriteAllText"
     }
   ]
 }

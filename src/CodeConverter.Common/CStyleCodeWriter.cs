@@ -432,7 +432,12 @@ namespace CodeConverter.Common
 
         }
 
-        public override void VisitUnknown(Unknown unknown)
+		public override void VisitTypeExpression(TypeExpression node)
+		{
+			Append(node.TypeName);
+		}
+
+		public override void VisitUnknown(Unknown unknown)
         {
             Append(unknown.Message);
         }

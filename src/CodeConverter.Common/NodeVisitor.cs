@@ -199,6 +199,11 @@
 
         }
 
+		public virtual void VisitTypeExpression(TypeExpression node)
+		{
+
+		}
+
         public virtual void VisitSwitchStatement(SwitchStatement node)
         {
             node.Expression.Accept(this);

@@ -8,6 +8,7 @@ namespace CodeConverter.Common
     /// </summary>
     public abstract class CodeWriter : NodeVisitor
     {
+		protected IntentVisitor IntentVisitor { get; set; }
         /// <summary>
         /// Builder containing the code to write.
         /// </summary>

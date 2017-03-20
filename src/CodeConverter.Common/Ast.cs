@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace CodeConverter.Common
 {
@@ -12,6 +13,7 @@ namespace CodeConverter.Common
         public CodeWriter CodeWriter { get; set; }
         public Language SourceLanguage { get; }
         public string OriginalSource { get; set; }
+		public Intent Intent { get; set; }
         public abstract void Accept(NodeVisitor visitor);
 
 		protected void SetParent(Node node)
@@ -807,6 +809,21 @@ namespace CodeConverter.Common
             visitor.VisitSwitchSection(this);
         }
     }
+
+	public class TypeExpression : Node
+	{
+		public TypeExpression(string typeName)
+		{
+			TypeName = typeName;
+		}
+
+		public string TypeName { get; set; }
+
+		public override void Accept(NodeVisitor visitor)
+		{
+			visitor.VisitTypeExpression(this);
+		}
+	}
 
     public class Unknown : Node
     {

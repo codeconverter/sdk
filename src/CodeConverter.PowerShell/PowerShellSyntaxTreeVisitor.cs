@@ -169,6 +169,9 @@ namespace CodeConverter.PowerShell
 
 		public Node ConvertCommand(Invocation node)
 		{
+			var commandIntentFactory = new CommandIntentFactory();
+			node.Intent = commandIntentFactory.DetermineCommandIntent(node);
+
 			var name = node.Expression as IdentifierName;
 			if (name == null)
 				return node;
@@ -348,9 +351,11 @@ namespace CodeConverter.PowerShell
 
             var methodName = methodCallAst.Member.ToString();
 
+			var memberAccess = new MemberAccess(expression, methodName);
+
             var argumentList = new ArgumentList(arguments);
 
-            _currentNode = new Invocation(expression, argumentList);
+            _currentNode = new Invocation(memberAccess, argumentList);
 
             return AstVisitAction.SkipChildren;
         }
@@ -376,6 +381,15 @@ namespace CodeConverter.PowerShell
 			}
 			
 			return AstVisitAction.SkipChildren; 
+		}
+
+		public override AstVisitAction VisitTypeExpression(TypeExpressionAst typeExpressionAst)
+		{
+			var name = typeExpressionAst.TypeName.Name;
+
+			_currentNode = new TypeExpression(name);
+
+			return AstVisitAction.SkipChildren;
 		}
 
 		public override AstVisitAction VisitStringConstantExpression(StringConstantExpressionAst stringConstantExpressionAst)

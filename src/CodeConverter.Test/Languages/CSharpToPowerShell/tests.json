@@ -70,6 +70,10 @@
       "Name": "Snippet",
       "Description": "Declare a method outside of a class or namespace"
     },
+    //{
+    //  "Name": "StaticMethod",
+    //  "Description": "Static method"
+    //},
     {
       "Name": "Switch",
       "Description": "Switch statement"

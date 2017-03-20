@@ -67,7 +67,7 @@ namespace CodeConverter.CSharp
                 return null;
             }
 
-            var originalSource = node.ToString();
+			var originalSource = node.ToString();
 
             Visit(node);
 

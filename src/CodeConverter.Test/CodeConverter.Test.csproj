@@ -22,6 +22,7 @@
     <Compile Remove="Languages\CSharpToPowerShell\CSharp\PropertyAccess.cs" />
     <Compile Remove="Languages\CSharpToPowerShell\CSharp\Return.cs" />
     <Compile Remove="Languages\CSharpToPowerShell\CSharp\Snippet.cs" />
+    <Compile Remove="Languages\CSharpToPowerShell\CSharp\StaticMethod.cs" />
     <Compile Remove="Languages\CSharpToPowerShell\CSharp\Switch.cs" />
     <Compile Remove="Languages\CSharpToPowerShell\CSharp\Throw.cs" />
     <Compile Remove="Languages\CSharpToPowerShell\CSharp\TryCatchFinally.cs" />
@@ -41,10 +42,12 @@
     <Compile Remove="Languages\PowerShellToCSharp\CSharp\Operators.cs" />
     <Compile Remove="Languages\PowerShellToCSharp\CSharp\PropertyAccess.cs" />
     <Compile Remove="Languages\PowerShellToCSharp\CSharp\Return.cs" />
+    <Compile Remove="Languages\PowerShellToCSharp\CSharp\StaticMethod.cs" />
     <Compile Remove="Languages\PowerShellToCSharp\CSharp\Switch.cs" />
     <Compile Remove="Languages\PowerShellToCSharp\CSharp\Throw.cs" />
     <Compile Remove="Languages\PowerShellToCSharp\CSharp\TryCatchFinally.cs" />
     <Compile Remove="Languages\PowerShellToCSharp\CSharp\While.cs" />
+    <Compile Remove="Languages\PowerShellToCSharp\CSharp\WriteFile.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -54,6 +57,8 @@
     <None Remove="Languages\CSharpToPowerShell\PowerShell\Throw.ps1" />
     <None Remove="Languages\CSharpToPowerShell\PowerShell\Using.ps1" />
     <None Remove="Languages\CSharpToPowerShell\tests.json" />
+    <None Remove="Languages\PowerShellToCSharp\PowerShell\StaticMethod.ps1" />
+    <None Remove="Languages\PowerShellToCSharp\PowerShell\WriteFile.ps1" />
     <None Remove="Languages\PowerShellToCSharp\tests.json" />
   </ItemGroup>
 
@@ -62,6 +67,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Languages\CSharpToPowerShell\CSharp\IncompleteCodeBlock.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharpToPowerShell\CSharp\StaticMethod.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Languages\CSharpToPowerShell\CSharp\Switch.cs">
@@ -83,6 +91,9 @@
 
   <ItemGroup>
     <Content Include="Languages\CSharpToPowerShell\CSharp\ArrayCreation.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\CSharpToPowerShell\PowerShell\StaticMethod.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Languages\CSharpToPowerShell\tests.json">
@@ -238,6 +249,9 @@
     <Content Include="Languages\PowerShellToCSharp\CSharp\Return.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Languages\PowerShellToCSharp\CSharp\StaticMethod.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Languages\PowerShellToCSharp\CSharp\Switch.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -248,6 +262,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Languages\PowerShellToCSharp\CSharp\While.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\PowerShellToCSharp\CSharp\WriteFile.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Languages\PowerShellToCSharp\PowerShell\ArrayCreation.ps1">
@@ -292,6 +309,9 @@
     <Content Include="Languages\PowerShellToCSharp\PowerShell\Return.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Languages\PowerShellToCSharp\PowerShell\StaticMethod.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Languages\PowerShellToCSharp\PowerShell\Switch.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -302,6 +322,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Languages\PowerShellToCSharp\PowerShell\While.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\PowerShellToCSharp\PowerShell\WriteFile.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Languages\PowerShellToCSharp\tests.json">
