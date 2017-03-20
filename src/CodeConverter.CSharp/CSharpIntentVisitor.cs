@@ -24,6 +24,13 @@ namespace CodeConverter.CSharp
 			return new Invocation(memberAccess, new ArgumentList(arguments));
 		}
 
+		public override Node VisitWriteHostIntent(WriteHostIntent intent)
+		{
+			var consoleClass = new IdentifierName("Console");
+			var memberAccess = new MemberAccess(consoleClass, "WriteLine");
+			return new Invocation(memberAccess, new ArgumentList(new Argument(intent.Object)));
+		}
+
 		public override Node VisitStartProcessIntent(StartProcessIntent intent)
 		{
 			var processCreation = new ObjectCreation("Process", null);

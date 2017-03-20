@@ -85,6 +85,10 @@
     {
       "Name": "WriteFile",
       "Description": "Out-File to File.WriteAllText"
+    },
+    {
+      "Name": "WriteHost",
+      "Description": "Write-Host to Console.WriteLine"
     }
   ]
 }

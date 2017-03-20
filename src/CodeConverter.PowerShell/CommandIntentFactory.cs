@@ -20,6 +20,10 @@ namespace CodeConverter.PowerShell
 			{
 				return ProcessStartProcess(node);
 			}
+			else if (name.Name.Equals("Write-Host", StringComparison.OrdinalIgnoreCase))
+			{
+				return ProcessWriteHost(node);
+			}
 
 			return null;
 		}
@@ -52,6 +56,17 @@ namespace CodeConverter.PowerShell
 			{
 				FilePath = filePath,
 				Arguments = argumentList
+			};
+		}
+
+		private Intent ProcessWriteHost(Invocation node)
+		{
+			var obj = GetParameter("Object", node);
+			if (obj == null) return null;
+
+			return new WriteHostIntent(node)
+			{
+				Object = obj
 			};
 		}
 

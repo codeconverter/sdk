@@ -10,6 +10,21 @@
 		public abstract Node Accept(IntentVisitor visitor);
 	}
 
+	public class StartProcessIntent : Intent
+	{
+		public StartProcessIntent(Node node) : base(node)
+		{
+		}
+
+		public Node FilePath { get; set; }
+		public Node Arguments { get; set; }
+
+		public override Node Accept(IntentVisitor visitor)
+		{
+			return visitor.VisitStartProcessIntent(this);
+		}
+	}
+
 	public class WriteFileIntent : Intent
 	{
 		public WriteFileIntent(Node node) : base(node)
@@ -26,18 +41,17 @@
 		}
 	}
 
-	public class StartProcessIntent : Intent
+	public class WriteHostIntent : Intent
 	{
-		public StartProcessIntent(Node node) : base(node)
+		public WriteHostIntent(Node node) : base(node)
 		{
 		}
 
-		public Node FilePath { get; set; }
-		public Node Arguments { get; set; }
+		public Node Object { get; set; }
 
 		public override Node Accept(IntentVisitor visitor)
 		{
-			return visitor.VisitStartProcessIntent(this);
+			return visitor.VisitWriteHostIntent(this);
 		}
 	}
 }
