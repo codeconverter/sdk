@@ -42,6 +42,7 @@
     <Compile Remove="Languages\PowerShellToCSharp\CSharp\Operators.cs" />
     <Compile Remove="Languages\PowerShellToCSharp\CSharp\PropertyAccess.cs" />
     <Compile Remove="Languages\PowerShellToCSharp\CSharp\Return.cs" />
+    <Compile Remove="Languages\PowerShellToCSharp\CSharp\StartProcess.cs" />
     <Compile Remove="Languages\PowerShellToCSharp\CSharp\StaticMethod.cs" />
     <Compile Remove="Languages\PowerShellToCSharp\CSharp\Switch.cs" />
     <Compile Remove="Languages\PowerShellToCSharp\CSharp\Throw.cs" />
@@ -57,6 +58,7 @@
     <None Remove="Languages\CSharpToPowerShell\PowerShell\Throw.ps1" />
     <None Remove="Languages\CSharpToPowerShell\PowerShell\Using.ps1" />
     <None Remove="Languages\CSharpToPowerShell\tests.json" />
+    <None Remove="Languages\PowerShellToCSharp\PowerShell\StartProcess.ps1" />
     <None Remove="Languages\PowerShellToCSharp\PowerShell\StaticMethod.ps1" />
     <None Remove="Languages\PowerShellToCSharp\PowerShell\WriteFile.ps1" />
     <None Remove="Languages\PowerShellToCSharp\tests.json" />
@@ -249,6 +251,9 @@
     <Content Include="Languages\PowerShellToCSharp\CSharp\Return.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Languages\PowerShellToCSharp\CSharp\StartProcess.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Languages\PowerShellToCSharp\CSharp\StaticMethod.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -307,6 +312,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Languages\PowerShellToCSharp\PowerShell\Return.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\PowerShellToCSharp\PowerShell\StartProcess.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Languages\PowerShellToCSharp\PowerShell\StaticMethod.ps1">

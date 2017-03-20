@@ -25,4 +25,19 @@
 			return visitor.VisitWriteFileIntent(this);
 		}
 	}
+
+	public class StartProcessIntent : Intent
+	{
+		public StartProcessIntent(Node node) : base(node)
+		{
+		}
+
+		public Node FilePath { get; set; }
+		public Node Arguments { get; set; }
+
+		public override Node Accept(IntentVisitor visitor)
+		{
+			return visitor.VisitStartProcessIntent(this);
+		}
+	}
 }

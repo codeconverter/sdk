@@ -1,5 +1,5 @@
-$version = "1.0.14-alpha"
-$releaseNotes = "Bug fixes"
+$version = "1.0.16-alpha"
+$releaseNotes = "Start-Process to Process.Start() support"
 
 $projects = @('CodeConverter.Common', 'CodeConverter.CSharp', 'CodeConverter.PowerShell', 'CodeConverter')
 

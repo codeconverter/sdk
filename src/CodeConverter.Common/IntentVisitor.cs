@@ -6,5 +6,10 @@
 		{
 			return intent.Node;
 		}
-    }
+
+		public virtual Node VisitStartProcessIntent(StartProcessIntent intent)
+		{
+			return intent.Node;
+		}
+	}
 }

@@ -23,5 +23,27 @@ namespace CodeConverter.CSharp
 
 			return new Invocation(memberAccess, new ArgumentList(arguments));
 		}
+
+		public override Node VisitStartProcessIntent(StartProcessIntent intent)
+		{
+			var processCreation = new ObjectCreation("Process", null);
+			var processVariable = new VariableDeclaration("Process", new VariableDeclarator("process", processCreation));
+
+			var processInfoCreation = new ObjectCreation("ProcessStartInfo", null);
+			var processInfoVariable = new VariableDeclaration("ProcessStartInfo", new VariableDeclarator("startInfo", processInfoCreation));
+
+			var setFileName = new MemberAccess(new IdentifierName("startInfo"), "FileName");
+			var filePathAssignment = new Assignment(setFileName, intent.FilePath);
+
+			var setArguments = new MemberAccess(new IdentifierName("startInfo"), "Arguments");
+			var argumentsAssignment = new Assignment(setArguments, intent.Arguments);
+
+			var setStartInfo = new MemberAccess(new IdentifierName("process"), "StartInfo");
+			var startInfoAssignment = new Assignment(setStartInfo, new IdentifierName("startInfo"));
+
+			var start = new Invocation(new MemberAccess(new IdentifierName("process"), "Start"), new ArgumentList());
+
+			return new Block(processVariable, processInfoVariable, filePathAssignment, argumentsAssignment, startInfoAssignment, start);
+		}
 	}
 }

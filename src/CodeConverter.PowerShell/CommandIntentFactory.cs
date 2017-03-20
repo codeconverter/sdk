@@ -16,6 +16,10 @@ namespace CodeConverter.PowerShell
 			{
 				return ProcessOutFile(node);
 			}
+			else if (name.Name.Equals("Start-Process", StringComparison.OrdinalIgnoreCase))
+			{
+				return ProcessStartProcess(node);
+			}
 
 			return null;
 		}
@@ -33,6 +37,21 @@ namespace CodeConverter.PowerShell
 				Append = append,
 				Content = content.Expression,
 				FilePath = filePath.Expression
+			};
+		}
+
+		private Intent ProcessStartProcess(Invocation node)
+		{
+			var filePath = GetParameter("FilePath", node);
+			if (filePath == null) return null;
+
+			var argumentList = GetParameter("ArgumentList", node);
+			if (argumentList == null) return null;
+
+			return new StartProcessIntent(node)
+			{
+				FilePath = filePath,
+				Arguments = argumentList
 			};
 		}
 
