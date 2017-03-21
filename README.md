@@ -1,6 +1,6 @@
 # SDK for [CodeConverter.NET](https://codeconverter.net)
 
-This SDK supports the conversion of source code from one language to another via a parse and syntax tree interface, common AST and code writer interface. The result of the project can be access viewed CodeConverter.net.
+This SDK supports the conversion of source code from one language to another via a parse and syntax tree interface, common AST and code writer interface. An online conversion utility is available at [CodeConverter.NET](https://codeconverter.net).
 
 [NuGet Package](https://www.nuget.org/packages/codeconverter/)
 
