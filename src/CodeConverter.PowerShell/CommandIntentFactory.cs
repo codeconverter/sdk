@@ -1,7 +1,12 @@
 ﻿using CodeConverter.Common;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-
+using System.Management.Automation;
+using System.Management.Automation.Language;
+using System.Reflection;
 
 namespace CodeConverter.PowerShell
 {
@@ -74,5 +79,41 @@ namespace CodeConverter.PowerShell
 		{
 			return node.Arguments.Arguments.Cast<Argument>().FirstOrDefault(m => m.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
 		}
+    }
+    
+    public class ParameterFinder
+    {
+        public static void FindBoundParameters(CommandAst commandAst)
+        {
+            var commandName = commandAst.GetCommandName();
+
+            var assembly = Assembly.GetExecutingAssembly();
+            var resourceName = "CodeConverter.PowerShell.GetBoundParameters.ps1";
+
+            string getBoundParameterScript;
+            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                getBoundParameterScript = reader.ReadToEnd();
+            }
+
+            resourceName = $"CodeConverter.PowerShell.ProxyCommands.{commandName}.ps1";
+            string proxyCommand;
+            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                proxyCommand = reader.ReadToEnd();
+            }
+
+            using (var powerShell = System.Management.Automation.PowerShell.Create())
+            {
+                powerShell.AddScript(getBoundParameterScript);
+                powerShell.Invoke();
+                powerShell.AddCommand("Get-BoundParameter");
+                powerShell.AddParameter("commandAst", commandAst);
+                powerShell.AddParameter("proxyCommand", proxyCommand);
+                var psobject = powerShell.Invoke();
+            }
+        }
     }
 }

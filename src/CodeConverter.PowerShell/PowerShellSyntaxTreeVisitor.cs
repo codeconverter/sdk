@@ -162,6 +162,8 @@ namespace CodeConverter.PowerShell
 				arguments.Add(argument);
 			}
 
+            ParameterFinder.FindBoundParameters(commandAst);
+
 			_currentNode = ConvertCommand(new Invocation(new IdentifierName(name), new ArgumentList(arguments)));
 
 			return AstVisitAction.SkipChildren;

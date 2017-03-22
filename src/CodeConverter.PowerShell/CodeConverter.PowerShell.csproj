@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
@@ -16,6 +16,13 @@
     <PackageReleaseNotes>Start-Process to Process.Start() support</PackageReleaseNotes>
     <Version>1.0.16-alpha</Version>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="ProxyCommands\Start-Process.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="GetBoundParameters.ps1" />
+    <EmbeddedResource Include="ProxyCommands\Start-Process.ps1" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CodeConverter.Common\CodeConverter.Common.csproj" />
   </ItemGroup>
