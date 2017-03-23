@@ -175,6 +175,13 @@ namespace CodeConverter.PowerShell
                         var argument = new Argument(parameter.Key, node);
                         arguments.Add(argument);
                     }
+					else if (parameter.Value is ExpressionAst[])
+					{
+						var ast = (parameter.Value as ExpressionAst[]).First();
+						var node = VisitSyntaxNode(ast);
+						var argument = new Argument(parameter.Key, node);
+						arguments.Add(argument);
+					}
                     else
                     {
                         var literal = new Literal(parameter.Value.ToString());
