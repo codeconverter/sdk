@@ -162,8 +162,28 @@ namespace CodeConverter.PowerShell
 				arguments.Add(argument);
 			}
 
-            ParameterFinder.FindBoundParameters(commandAst);
-
+            if (ParameterFinder.HasProxyCommand(commandAst))
+            {
+                arguments = new List<Argument>();
+                var parameters = ParameterFinder.FindBoundParameters(commandAst);
+                foreach(var parameter in parameters)
+                {
+                    if (parameter.Value is Ast)
+                    {
+                        var ast = parameter.Value as Ast;
+                        var node = VisitSyntaxNode(ast);
+                        var argument = new Argument(parameter.Key, node);
+                        arguments.Add(argument);
+                    }
+                    else
+                    {
+                        var literal = new Literal(parameter.Value.ToString());
+                        var argument = new Argument(parameter.Key, literal);
+                        arguments.Add(argument);
+                    }
+                }
+            }
+            
 			_currentNode = ConvertCommand(new Invocation(new IdentifierName(name), new ArgumentList(arguments)));
 
 			return AstVisitAction.SkipChildren;

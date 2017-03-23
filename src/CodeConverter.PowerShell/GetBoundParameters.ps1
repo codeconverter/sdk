@@ -12,5 +12,5 @@
 	$bindingInfo = $DoPseudoParameterBinding.Invoke($psuedoParameterBinder, @($commandAst, $null, $null, $bindingTypeType.GetEnumValues()[0]))
 
 	$boundArgumentsProperty = $pseudoBindingInfoType.GetProperty("BoundArguments", [System.Reflection.BindingFlags]::Instance -bor [System.Reflection.BindingFlags]::NonPublic)
-	$boundArgumentsProperty.GetValue($bindingInfo) 
+	$boundArgumentsProperty.GetValue($bindingInfo).GetEnumerator()  | % { @{ Name = $_.Key; Ast = $_.Value.Argument }  } 
 }

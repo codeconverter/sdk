@@ -83,7 +83,15 @@ namespace CodeConverter.PowerShell
     
     public class ParameterFinder
     {
-        public static void FindBoundParameters(CommandAst commandAst)
+        public static bool HasProxyCommand(CommandAst commandAst)
+        {
+            var commandName = commandAst.GetCommandName();
+            var assembly = Assembly.GetExecutingAssembly();
+            var resourceName = $"CodeConverter.PowerShell.ProxyCommands.{commandName}.ps1";
+            return assembly.GetManifestResourceStream(resourceName) != null;
+        }
+
+        public static Dictionary<string, object> FindBoundParameters(CommandAst commandAst)
         {
             var commandName = commandAst.GetCommandName();
 
@@ -105,6 +113,7 @@ namespace CodeConverter.PowerShell
                 proxyCommand = reader.ReadToEnd();
             }
 
+            var result = new Dictionary<string, object>();
             using (var powerShell = System.Management.Automation.PowerShell.Create())
             {
                 powerShell.AddScript(getBoundParameterScript);
@@ -113,7 +122,14 @@ namespace CodeConverter.PowerShell
                 powerShell.AddParameter("commandAst", commandAst);
                 powerShell.AddParameter("proxyCommand", proxyCommand);
                 var psobject = powerShell.Invoke();
+
+                foreach (var param in psobject.Select(m => m.BaseObject).Cast<Hashtable>())
+                {
+                    result.Add(param["Name"] as string, param["Ast"]);
+                }
             }
+
+            return result;
         }
     }
 }
