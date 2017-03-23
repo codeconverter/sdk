@@ -145,23 +145,6 @@ namespace CodeConverter.PowerShell
 			var elements = commandAst.CommandElements.Skip(1).ToArray();
 			var arguments = new List<Argument>();
 
-			for(var i = 0; i < elements.Length; i++)
-			{
-				var node = VisitSyntaxNode(elements[i]);
-				var argument = node as Argument;
-				if (argument != null && i < elements.Length - 1 && argument.Expression == null)
-				{
-					node = VisitSyntaxNode(elements[i+1]);
-					argument.Expression = node;
-					i++;
-				}
-				else if (argument == null)
-				{
-					argument = new Argument(node);
-				}
-				arguments.Add(argument);
-			}
-
             if (ParameterFinder.HasProxyCommand(commandAst))
             {
                 arguments = new List<Argument>();
@@ -190,6 +173,25 @@ namespace CodeConverter.PowerShell
                     }
                 }
             }
+			else
+			{
+				for (var i = 0; i < elements.Length; i++)
+				{
+					var node = VisitSyntaxNode(elements[i]);
+					var argument = node as Argument;
+					if (argument != null && i < elements.Length - 1 && argument.Expression == null)
+					{
+						node = VisitSyntaxNode(elements[i + 1]);
+						argument.Expression = node;
+						i++;
+					}
+					else if (argument == null)
+					{
+						argument = new Argument(node);
+					}
+					arguments.Add(argument);
+				}
+			}
             
 			_currentNode = ConvertCommand(new Invocation(new IdentifierName(name), new ArgumentList(arguments)));
 
