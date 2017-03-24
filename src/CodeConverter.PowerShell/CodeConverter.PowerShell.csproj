@@ -19,6 +19,7 @@
   <ItemGroup>
     <None Remove="ProxyCommands\Get-Process.ps1" />
     <None Remove="ProxyCommands\Get-Service.ps1" />
+    <None Remove="ProxyCommands\New-Object.ps1" />
     <None Remove="ProxyCommands\Start-Process.ps1" />
     <None Remove="ProxyCommands\Write-Host.ps1" />
   </ItemGroup>
@@ -26,6 +27,9 @@
     <EmbeddedResource Include="GetBoundParameters.ps1" />
     <EmbeddedResource Include="ProxyCommands\Get-Process.ps1" />
     <EmbeddedResource Include="ProxyCommands\Get-Service.ps1" />
+    <EmbeddedResource Include="ProxyCommands\New-Object.ps1">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="ProxyCommands\Out-File.ps1" />
     <EmbeddedResource Include="ProxyCommands\Start-Process.ps1" />
     <EmbeddedResource Include="ProxyCommands\Write-Host.ps1" />
