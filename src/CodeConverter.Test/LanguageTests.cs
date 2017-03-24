@@ -38,13 +38,17 @@ namespace CodeConverter.Test
 
             Assert.Equal(target, actual);
 
-			var testcase = new XElement("testcase",
-				new XElement("description", testCase.Description),
-				new XElement("category", testCase.Category),
-				new XElement("source", source),
-				new XElement("target", target));
+			var testResult = new TestCaseResult
+			{
+				Category = testCase.Category,
+				Name = testCase.Name,
+				Source = testCase.SyntaxTreeVisitor.Language,
+				Target = testCase.CodeWriter.Language,
+				SourceContent = source,
+				TargetContent = target
+			};
 
-			_fixture.AddTestCase(testcase);
+			_fixture.AddTestCase(testResult);
         }
 
         private string GetLanguageExtension(Language language)
@@ -78,8 +82,7 @@ namespace CodeConverter.Test
 
     public class Fixture : IDisposable
     {
-		private XElement _testSuiteElement;
-		
+		private List<TestCaseResult> _results = new List<TestCaseResult>();
 
         public Fixture()
         {
@@ -95,32 +98,23 @@ namespace CodeConverter.Test
 					var sourceLanguage = Enum.GetName(typeof(Language), syntaxTreeVisitor.Language);
 					var targetLanguage = Enum.GetName(typeof(Language), codeWriter.Language);
 
-					var xmlPath = Path.Combine(GetTestDirectory(), @"..\..\..\..\..\testresults.xml");
-					File.Delete(xmlPath);
-
-					_testSuiteElement = new XElement("testresults", 
-						new XElement("testsuite", 
-							new XElement("timestamp", DateTime.Now),
-							new XElement("source", sourceLanguage),
-							new XElement("target" , targetLanguage),
-							new XElement("testcases")
-							));
+					var jsonPath = Path.Combine(GetTestDirectory(), @"..\..\..\..\..\testresults.json");
+					File.Delete(jsonPath);
 				}
 			}
 
 
         }
 
-		public void AddTestCase(XElement element)
+		public void AddTestCase(TestCaseResult result)
 		{
-			var x = _testSuiteElement.Descendants("testcases").First();
-			x.Add(element);
+			_results.Add(result);
 		}
 
         public void Dispose()
         {
-			var document = new XDocument(_testSuiteElement);
-			document.Save(Path.Combine(GetTestDirectory(), @"..\..\..\..\..\testresults.xml"));
+			var json = JsonConvert.SerializeObject(_results);
+			File.WriteAllText(Path.Combine(GetTestDirectory(), @"..\..\..\..\..\testresults.json"), json);
 
 		}
 
@@ -187,6 +181,7 @@ namespace CodeConverter.Test
         public Language Source { get; set; }
         public Language Target { get; set; }
         public List<TestCase> TestCases { get; set; }
+
     }
 
     public class TestCase
@@ -195,6 +190,17 @@ namespace CodeConverter.Test
         public string Description { get; set; }
 		public string Category { get; set; }
     }
+
+	public class TestCaseResult
+	{
+		public string Name { get; set; }
+		public string Description { get; set; }
+		public string Category { get; set; }
+		public string SourceContent { get; set; }
+		public string TargetContent { get; set; }
+		public Language Source { get; set; }
+		public Language Target { get; set; }
+	}
 
     public class ConversionTestCase : IXunitSerializable
     {
