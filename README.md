@@ -13,6 +13,6 @@ Install-Package codeconverter -pre
 - C# to PowerShell
 - PowerShell to C#
 
-## Conversion Tests
+## Language Conversion
 
-[Language Tests](https://codeconverter.github.io/sdk/language-tests)
+[Language Conversion Cheat Sheets](https://codeconverter.net/cheatsheet) - Cheat sheets are generated based on Code Converter tests. 
