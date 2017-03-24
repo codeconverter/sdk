@@ -20,7 +20,7 @@
     {
       "Name": "GetProcess",
       "Description": "Get-Process to Process",
-      "Category": "Intent"
+      "Category": "Cmdlets"
     },
     {
       "Name": "For",
@@ -85,7 +85,7 @@
     {
       "Name": "StartProcess",
       "Description": "Start-Process to Process.Start",
-      "Category": "Intent"
+      "Category": "Cmdlets"
     },
     {
       "Name": "Switch",
@@ -110,12 +110,12 @@
     {
       "Name": "WriteFile",
       "Description": "Out-File to File.WriteAllText",
-      "Category": "Intent"
+      "Category": "Cmdlets"
     },
     {
       "Name": "WriteHost",
       "Description": "Write-Host to Console.WriteLine",
-      "Category": "Intent"
+      "Category": "Cmdlets"
     }
   ]
 }
