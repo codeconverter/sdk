@@ -41,6 +41,7 @@ namespace CodeConverter.Test
 			var testResult = new TestCaseResult
 			{
 				Category = testCase.Category,
+				Description = testCase.Description,
 				Name = testCase.Name,
 				Source = testCase.SyntaxTreeVisitor.Language,
 				Target = testCase.CodeWriter.Language,
