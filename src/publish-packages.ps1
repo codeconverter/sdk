@@ -1,5 +1,5 @@
 $version = "1.0.17-alpha"
-$releaseNotes = "Start-Process to Process.Start() support"
+$releaseNotes = "Adding better command conversions for Write-Host, Start-Process and Out-File"
 
 $projects = @('CodeConverter.Common', 'CodeConverter.CSharp', 'CodeConverter.PowerShell', 'CodeConverter')
 

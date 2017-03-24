@@ -11,10 +11,10 @@
     <PackageProjectUrl>https://github.com/codeconverter/sdk</PackageProjectUrl>
     <RepositoryUrl>https://github.com/codeconverter/sdk</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
-    <PackageReleaseNotes>Start-Process to Process.Start() support</PackageReleaseNotes>
+    <PackageReleaseNotes>Adding better command conversions for Write-Host, Start-Process and Out-File</PackageReleaseNotes>
     <PackageTags>code conversion</PackageTags>
     <PackageId>CodeConverter</PackageId>
-    <Version>1.0.16-alpha</Version>
+    <Version>1.0.17-alpha</Version>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\CodeConverter.Common\CodeConverter.Common.csproj" />
