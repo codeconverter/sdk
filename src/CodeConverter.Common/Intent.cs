@@ -25,6 +25,33 @@
 		}
 	}
 
+	public class GetProcessIntent : Intent
+	{
+		public GetProcessIntent(Node node) : base(node)
+		{
+		}
+
+		public Node Name { get; set; }
+		public Node Id { get; set; }
+		public override Node Accept(IntentVisitor visitor)
+		{
+			return visitor.VisitGetProcessIntent(this);
+		}
+	}
+
+	public class GetServiceIntent : Intent
+	{
+		public GetServiceIntent(Node node) : base(node)
+		{
+		}
+
+		public Node Name { get; set; }
+		public override Node Accept(IntentVisitor visitor)
+		{
+			return visitor.VisitGetServiceIntent(this);
+		}
+	}
+
 	public class WriteFileIntent : Intent
 	{
 		public WriteFileIntent(Node node) : base(node)

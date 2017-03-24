@@ -52,5 +52,20 @@ namespace CodeConverter.CSharp
 
 			return new Block(processVariable, processInfoVariable, filePathAssignment, argumentsAssignment, startInfoAssignment, start);
 		}
+
+		public override Node VisitGetProcessIntent(GetProcessIntent intent)
+		{
+			var typeExpression = new TypeExpression("System.Diagnostics.Process");
+
+			if (intent.Id != null)
+			{
+				return new Invocation(new MemberAccess(typeExpression, "GetProcessById"), new ArgumentList(new Argument(intent.Id)));
+			}
+			if (intent.Name != null)
+			{
+				return new Invocation(new MemberAccess(typeExpression, "GetProcessesByName"), new ArgumentList(new Argument(intent.Name)));
+			}
+			return new Invocation(new MemberAccess(typeExpression, "GetProcesses"), new ArgumentList());
+		}
 	}
 }

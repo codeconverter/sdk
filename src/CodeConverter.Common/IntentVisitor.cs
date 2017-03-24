@@ -16,5 +16,15 @@
 		{
 			return intent.Node;
 		}
+
+		public virtual Node VisitGetServiceIntent(GetServiceIntent intent)
+		{
+			return intent.Node;
+		}
+
+		public virtual Node VisitGetProcessIntent(GetProcessIntent intent)
+		{
+			return intent.Node;
+		}
 	}
 }

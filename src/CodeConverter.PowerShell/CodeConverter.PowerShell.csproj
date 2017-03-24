@@ -17,11 +17,15 @@
     <Version>1.0.17-alpha</Version>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="ProxyCommands\Get-Process.ps1" />
+    <None Remove="ProxyCommands\Get-Service.ps1" />
     <None Remove="ProxyCommands\Start-Process.ps1" />
     <None Remove="ProxyCommands\Write-Host.ps1" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="GetBoundParameters.ps1" />
+    <EmbeddedResource Include="ProxyCommands\Get-Process.ps1" />
+    <EmbeddedResource Include="ProxyCommands\Get-Service.ps1" />
     <EmbeddedResource Include="ProxyCommands\Out-File.ps1" />
     <EmbeddedResource Include="ProxyCommands\Start-Process.ps1" />
     <EmbeddedResource Include="ProxyCommands\Write-Host.ps1" />

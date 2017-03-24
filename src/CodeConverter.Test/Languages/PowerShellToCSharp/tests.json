@@ -18,6 +18,11 @@
       "Category": "Syntax"
     },
     {
+      "Name": "GetProcess",
+      "Description": "Get-Process to Process",
+      "Category": "Intent"
+    },
+    {
       "Name": "For",
       "Description": "For loop",
       "Category": "Loops"

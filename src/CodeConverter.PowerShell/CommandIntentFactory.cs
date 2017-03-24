@@ -17,7 +17,15 @@ namespace CodeConverter.PowerShell
 			var name = node.Expression as IdentifierName;
 			if (name == null) return null;
 
-			if (name.Name.Equals("Out-File", StringComparison.OrdinalIgnoreCase))
+			if (name.Name.Equals("Get-Process", StringComparison.OrdinalIgnoreCase))
+			{
+				return ProcessGetProcess(node);
+			}
+			else if (name.Name.Equals("Get-Service", StringComparison.OrdinalIgnoreCase))
+			{
+				return ProcessGetService(node);
+			}
+			else if (name.Name.Equals("Out-File", StringComparison.OrdinalIgnoreCase))
 			{
 				return ProcessOutFile(node);
 			}
@@ -31,6 +39,28 @@ namespace CodeConverter.PowerShell
 			}
 
 			return null;
+		}
+
+		private Intent ProcessGetService(Invocation node)
+		{
+			var name = GetParameter("Name", node);
+
+			return new GetServiceIntent(node)
+			{
+				Name = name
+			};
+		}
+
+		private Intent ProcessGetProcess(Invocation node)
+		{
+			var name = GetParameter("Name", node);
+			var id = GetParameter("Id", node);
+
+			return new GetProcessIntent(node)
+			{
+				Name = name,
+				Id = id
+			};
 		}
 
 		private Intent ProcessOutFile(Invocation node)
