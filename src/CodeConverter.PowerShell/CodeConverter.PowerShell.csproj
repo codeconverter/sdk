@@ -17,6 +17,7 @@
     <Version>1.0.17-alpha</Version>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="ProxyCommands\Add-Content.ps1" />
     <None Remove="ProxyCommands\Get-Process.ps1" />
     <None Remove="ProxyCommands\Get-Service.ps1" />
     <None Remove="ProxyCommands\New-Object.ps1" />
@@ -25,6 +26,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="GetBoundParameters.ps1" />
+    <EmbeddedResource Include="ProxyCommands\Add-Content.ps1" />
     <EmbeddedResource Include="ProxyCommands\Get-Process.ps1" />
     <EmbeddedResource Include="ProxyCommands\Get-Service.ps1" />
     <EmbeddedResource Include="ProxyCommands\New-Object.ps1">

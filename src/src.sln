@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.4
+VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeConverter.Common", "CodeConverter.Common\CodeConverter.Common.csproj", "{A9402DEA-CF3F-4C54-A832-1AA7C3919DBC}"
 EndProject
@@ -15,6 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeConverter", "CodeConver
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{77A99A38-03AB-4682-85EA-07C8941DC2BD}"
 	ProjectSection(SolutionItems) = preProject
+		New-ProxyFunction.ps1 = New-ProxyFunction.ps1
 		publish-packages.ps1 = publish-packages.ps1
 	EndProjectSection
 EndProject

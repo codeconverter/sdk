@@ -17,7 +17,11 @@ namespace CodeConverter.PowerShell
 			var name = node.Expression as IdentifierName;
 			if (name == null) return null;
 
-			if (name.Name.Equals("Get-Process", StringComparison.OrdinalIgnoreCase))
+			if (name.Name.Equals("Add-Content", StringComparison.OrdinalIgnoreCase))
+			{
+				return ProcessAddContent(node);
+			}
+			else if (name.Name.Equals("Get-Process", StringComparison.OrdinalIgnoreCase))
 			{
 				return ProcessGetProcess(node);
 			}
@@ -39,6 +43,21 @@ namespace CodeConverter.PowerShell
 			}
 
 			return null;
+		}
+
+		private Intent ProcessAddContent(Invocation node)
+		{
+			var filePath = GetParameter("Path", node);
+			if (filePath == null) return null;
+			var value = GetParameter("Value", node);
+			if (value == null) return null;
+
+			return new WriteFileIntent(node)
+			{
+				Append = new Argument("Append", null),
+				Content = value.Expression,
+				FilePath = filePath.Expression
+			};
 		}
 
 		private Intent ProcessGetService(Invocation node)
